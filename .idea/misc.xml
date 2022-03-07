@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/activity_main.xml" value="0.2094017094017094" />
-        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_main.xml" value="0.2" />
+        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable-v24/tab_main_background.xml" value="0.118" />
+        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_main.xml" value="0.2" />
+        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/item_tab_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/tab_main_background.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>
