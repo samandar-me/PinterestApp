@@ -9,32 +9,31 @@ import uz.context.pinterestapp.fragments.MessageFragment
 import uz.context.pinterestapp.fragments.ProfileFragment
 import uz.context.pinterestapp.fragments.SearchFragment
 
-class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
+class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
-
         return 4
     }
 
     override fun createFragment(position: Int): Fragment {
-        return   when(position){
+        return when (position) {
 
-            0->{
+            0 -> {
                 HomeFragment()
             }
-            1->{
+            1 -> {
                 SearchFragment()
             }
-            3->{
+            2 -> {
                 MessageFragment()
             }
-            4->{
+            3 -> {
                 ProfileFragment()
             }
 
-            else->{
+            else -> {
                 Fragment()
             }
-
         }
     }
 }

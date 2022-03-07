@@ -16,26 +16,22 @@ import uz.context.pinterestapp.adapter.ViewPagerAdapter
 class MainFragment : Fragment() {
 
     var tabSelected = 0
-    lateinit var tab_main: TabLayout
-    lateinit var view_pager: ViewPager2
+    private lateinit var tabMain: TabLayout
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        tab_main = view.findViewById(R.id.tab_main)
-        view_pager = view.findViewById(R.id.view_pager)
+        tabMain = view.findViewById(R.id.tab_main)
+        viewPager = view.findViewById(R.id.view_pager)
 
-//        tab_main.tabRippleColor = null
+        tabMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
-        //graph
-        tab_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                tabSelected = tab?.position!!
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                tabSelected = tab.position
                 when (tab.position) {
                     0 -> {
                         tab.customView?.findViewById<ImageView>(R.id.image_tab_main)
@@ -69,6 +65,7 @@ class MainFragment : Fragment() {
                     2 -> {
                         tab.customView?.findViewById<ImageView>(R.id.image_tab_main)
                             ?.setImageResource(R.drawable.chat_unselected_png)
+                            tab.setText("")
                     }
                     3 -> {
                         tab.customView?.findViewById<ImageView>(R.id.image_tab_main)
@@ -85,24 +82,20 @@ class MainFragment : Fragment() {
 
         //adapter start
 
-        val viewPager2 = view_pager
+        val viewPager2 = viewPager
 
         val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
 
         viewPager2.adapter = adapter
 
-        //ViewPagerni Swipe true fale
         viewPager2.isUserInputEnabled = false
-
-        //adapter end
-
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        val tabLayout = tab_main
-        TabLayoutMediator(tabLayout, view_pager) { tab, position ->
+        val tabLayout = tabMain
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
 
             val inflate =
                 LayoutInflater.from(context).inflate(R.layout.item_tab_main, null, false)
