@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import uz.context.pinterestapp.fragments.MessagesFragment
-import uz.context.pinterestapp.fragments.UpdateFragment
+import uz.context.pinterestapp.fragmentsall.MessagesFragment
+import uz.context.pinterestapp.fragmentsall.UpdateFragment
 
 class MessageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
     : FragmentStateAdapter(fragmentManager, lifecycle) {

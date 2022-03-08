@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="uz.context.pinterestapp.fragments.MainFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -72,42 +72,42 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="uz.context.pinterestapp.fragments.UpdateFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" />
     <fragment
         android:id="@+id/messagesFragment"
-        android:name="uz.context.pinterestapp.fragments.MessagesFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.MessagesFragment"
         android:label="fragment_messages"
         tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/fragment1"
-        android:name="uz.context.pinterestapp.fragments.Fragment1"
+        android:name="uz.context.pinterestapp.fragmentsall.Fragment1"
         android:label="fragment_1"
         tools:layout="@layout/fragment_1" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="uz.context.pinterestapp.fragments.Fragment2"
+        android:name="uz.context.pinterestapp.fragmentsall.Fragment2"
         android:label="fragment_2"
         tools:layout="@layout/fragment_2" />
     <fragment
         android:id="@+id/fragment3"
-        android:name="uz.context.pinterestapp.fragments.Fragment3"
+        android:name="uz.context.pinterestapp.fragmentsall.Fragment3"
         android:label="fragment_3"
         tools:layout="@layout/fragment_3" />
     <fragment
         android:id="@+id/fragment4"
-        android:name="uz.context.pinterestapp.fragments.Fragment4"
+        android:name="uz.context.pinterestapp.fragmentsall.Fragment4"
         android:label="fragment_4"
         tools:layout="@layout/fragment_4" />
     <fragment
         android:id="@+id/fragment5"
-        android:name="uz.context.pinterestapp.fragments.Fragment5"
+        android:name="uz.context.pinterestapp.fragmentsall.Fragment5"
         android:label="fragment_5"
         tools:layout="@layout/fragment_5" />
     <fragment
         android:id="@+id/fragment6"
-        android:name="uz.context.pinterestapp.fragments.Fragment6"
+        android:name="uz.context.pinterestapp.fragmentsall.Fragment6"
         android:label="fragment_6"
         tools:layout="@layout/fragment_6" />
 </navigation>

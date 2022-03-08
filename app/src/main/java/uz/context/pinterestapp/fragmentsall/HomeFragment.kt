@@ -1,4 +1,4 @@
-package uz.context.pinterestapp.fragments
+package uz.context.pinterestapp.fragmentsall
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,8 +25,8 @@ class HomeFragment : Fragment() {
         return view
     }
     private fun initViews(view: View) {
-        viewPager2 = view.findViewById(R.id.view_pager2)
-        tabLayout = view.findViewById(R.id.tabLayout)
+        viewPager2 = view.findViewById(R.id.view_pager22)
+        tabLayout = view.findViewById(R.id.tabLayout22)
         homeAdapter = HomeAdapter(childFragmentManager, lifecycle)
         viewPager2.adapter = homeAdapter
 

@@ -1,4 +1,4 @@
-package uz.context.pinterestapp.fragments
+package uz.context.pinterestapp.fragmentsall
 
 import android.os.Bundle
 import android.view.LayoutInflater

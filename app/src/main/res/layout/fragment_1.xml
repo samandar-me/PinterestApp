@@ -5,16 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Fragment1">
+    tools:context=".fragmentsall.Fragment1">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/black">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView1"
             tools:listitem="@layout/home_recycler_item"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="2"
