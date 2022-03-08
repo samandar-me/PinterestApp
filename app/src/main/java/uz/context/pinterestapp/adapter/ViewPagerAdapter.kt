@@ -30,7 +30,6 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
             3 -> {
                 ProfileFragment()
             }
-
             else -> {
                 Fragment()
             }

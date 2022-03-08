@@ -1,26 +1,22 @@
 package uz.context.pinterestapp.fragments
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
-import com.ogaclejapan.smarttablayout.SmartTabLayout
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import uz.context.pinterestapp.R
+import uz.context.pinterestapp.adapter.MessageAdapter
 
 
 class MessageFragment : Fragment() {
 
-    private lateinit var viewPager2: ViewPager
-    private lateinit var tabLayout: SmartTabLayout
-    private lateinit var messageAdapter: FragmentPagerItemAdapter
+    private lateinit var viewPager2: ViewPager2
+    private lateinit var messageAdapter: MessageAdapter
+    private lateinit var tabLayout: TabLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,42 +29,27 @@ class MessageFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
-        viewPager2 = view.findViewById(R.id.view_pager)
-        tabLayout = view.findViewById(R.id.tab_layout)
-
-        messageAdapter = FragmentPagerItemAdapter(
-            childFragmentManager, FragmentPagerItems.with(requireContext())
-                .add("Updates", UpdateFragment::class.java)
-                .add("Messages", MessagesFragment::class.java)
-                .create())
+        viewPager2 = view.findViewById(R.id.view_pager2)
+        tabLayout = view.findViewById(R.id.tabLayout)
+        messageAdapter = MessageAdapter(childFragmentManager, lifecycle)
         viewPager2.adapter = messageAdapter
-        tabLayout.setViewPager(viewPager2)
 
-        tabLayout.setOnPageChangeListener(object : ViewPager.OnPageChangeListener{
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-//                Log.d("@@@","${position.toString()} | ${positionOffset.toString()} | ${positionOffsetPixels.toString()}")
+        tabLayout.addTab(tabLayout.newTab().setText("Update"))
+        tabLayout.addTab(tabLayout.newTab().setText("Message"))
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewPager2.currentItem = tab!!.position
             }
 
-            override fun onPageSelected(position: Int) {
-                if (position == 0){
-                    tabLayout.setDefaultTabTextColor(R.color.black)
-                    messageAdapter.notifyDataSetChanged()
-                }
-                if (position == 1){
-                    tabLayout.setDefaultTabTextColor(Color.parseColor("#ffffff"))
-                    messageAdapter.notifyDataSetChanged()
-                }
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            override fun onPageScrollStateChanged(state: Int) {
-//                Toast.makeText(context, state.toString(), Toast.LENGTH_SHORT).show()
-            }
-
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
-
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                tabLayout.selectTab(tabLayout.getTabAt(position))
+            }
+        })
     }
 }

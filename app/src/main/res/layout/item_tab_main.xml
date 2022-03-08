@@ -8,6 +8,7 @@
     <ImageView
         android:id="@+id/image_tab_main"
         android:layout_width="match_parent"
+        android:contentDescription="@string/todo"
         android:background="@color/white"
         android:layout_height="50dp"
         android:padding="5dp"/>
