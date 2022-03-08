@@ -37,7 +37,8 @@ class Fragment1 : Fragment() {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-//            onResume()
+            apiPosterListRetrofit()
+            refreshAdapter(photos)
         }
 
         return view

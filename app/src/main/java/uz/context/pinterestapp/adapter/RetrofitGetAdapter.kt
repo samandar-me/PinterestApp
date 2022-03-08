@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.pinterest.Networking.ResponseItem
 import com.google.android.material.imageview.ShapeableImageView
 import uz.context.pinterestapp.R
@@ -28,6 +29,7 @@ class RetrofitGetAdapter(var items:ArrayList<ResponseItem>): RecyclerView.Adapte
             tv_title.text = home.description
             Glide.with(holder.itemView.context)
                 .load(home.urls?.thumb)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
         }
     }
