@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/card_view">
 
         <ImageView
+            android:visibility="gone"
             android:layout_width="25dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -50,6 +51,7 @@
             android:src="@drawable/favorite_png" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="308"
