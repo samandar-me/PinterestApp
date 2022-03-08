@@ -1,9 +1,12 @@
 package uz.context.pinterestapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -32,19 +35,40 @@ class MessageFragment : Fragment() {
     private fun initViews(view: View) {
         viewPager2 = view.findViewById(R.id.view_pager)
         tabLayout = view.findViewById(R.id.tab_layout)
+
         messageAdapter = FragmentPagerItemAdapter(
             childFragmentManager, FragmentPagerItems.with(requireContext())
-                .add("fjkdsl", UpdateFragment::class.java)
-                .add("fdsa", MessagesFragment::class.java)
+                .add("Updates", UpdateFragment::class.java)
+                .add("Messages", MessagesFragment::class.java)
                 .create())
         viewPager2.adapter = messageAdapter
         tabLayout.setViewPager(viewPager2)
 
-    }
-    private fun fragments(): ArrayList<Fragment> {
-        return arrayListOf(
-            UpdateFragment(),
-            MessagesFragment()
-        )
+        tabLayout.setOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+//                Log.d("@@@","${position.toString()} | ${positionOffset.toString()} | ${positionOffsetPixels.toString()}")
+            }
+
+            override fun onPageSelected(position: Int) {
+                if (position == 0){
+                    tabLayout.setDefaultTabTextColor(R.color.black)
+                    messageAdapter.notifyDataSetChanged()
+                }
+                if (position == 1){
+                    tabLayout.setDefaultTabTextColor(Color.parseColor("#ffffff"))
+                    messageAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+//                Toast.makeText(context, state.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
     }
 }
