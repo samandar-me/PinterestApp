@@ -32,6 +32,10 @@ class HomeFragment : Fragment() {
 
         tabLayout.addTab(tabLayout.newTab().setText("All"))
         tabLayout.addTab(tabLayout.newTab().setText("Marvels"))
+        tabLayout.addTab(tabLayout.newTab().setText("Tourism"))
+        tabLayout.addTab(tabLayout.newTab().setText("Space"))
+        tabLayout.addTab(tabLayout.newTab().setText("Horses"))
+        tabLayout.addTab(tabLayout.newTab().setText("Animals"))
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
