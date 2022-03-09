@@ -139,4 +139,5 @@
         android:name="uz.context.pinterestapp.fragmentsall.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+
 </navigation>

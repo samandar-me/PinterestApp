@@ -1,5 +1,6 @@
 package uz.context.pinterestapp.fragmentsall
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -75,6 +78,7 @@ class Fragment1 : Fragment() {
         progressBar1.visibility = View.VISIBLE
         RetrofitHttp.posterService.listPhotos1()
             .enqueue(object : Callback<ArrayList<ResponseItem>> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
                     call: Call<ArrayList<ResponseItem>>,
                     response: Response<ArrayList<ResponseItem>>

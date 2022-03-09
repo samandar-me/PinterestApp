@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -21,7 +22,8 @@ import uz.context.pinterestapp.model.GetDetailsInfo1
 import uz.context.pinterestapp.model.ResponseItem
 
 
-class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>):
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var itemCLick: ((ResponseItem) -> Unit)
 
@@ -49,9 +51,8 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
 
             cardView.setOnClickListener {
                 GetDetailsInfo1.title = home.description.toString()
-                GetDetailsInfo1.links = home.urls?.regular.toString()
+                GetDetailsInfo1.links = home.urls?.small.toString()
                 itemCLick.invoke(home)
-                Toast.makeText(context, "${home.description} ${home.urls?.thumb}", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -63,12 +64,11 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
 
     @SuppressLint("CutPasteId")
     class HomeViewHolder(view: View):RecyclerView.ViewHolder(view){
-        var tv_title: TextView
+        var tv_title: TextView = view.findViewById(R.id.tv_title)
         var iv_photo: ShapeableImageView
         var card_view: CardView
 
         init {
-            tv_title = view.findViewById(R.id.tv_title)
             iv_photo = view.findViewById(R.id.item_images1)
             card_view = view.findViewById(R.id.card_view1)
         }
