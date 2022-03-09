@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="uz.context.pinterestapp.HomeFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -32,12 +32,12 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="uz.context.pinterestapp.SearchFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/messageFragment"
-        android:name="uz.context.pinterestapp.MessageFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="uz.context.pinterestapp.ProfileFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
@@ -84,30 +84,59 @@
         android:id="@+id/fragment1"
         android:name="uz.context.pinterestapp.fragmentsall.Fragment1"
         android:label="fragment_1"
-        tools:layout="@layout/fragment_1" />
+        tools:layout="@layout/fragment_1" >
+        <action
+            android:id="@+id/action_fragment1_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment2"
         android:name="uz.context.pinterestapp.fragmentsall.Fragment2"
         android:label="fragment_2"
-        tools:layout="@layout/fragment_2" />
+        tools:layout="@layout/fragment_2" >
+        <action
+            android:id="@+id/action_fragment2_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment3"
         android:name="uz.context.pinterestapp.fragmentsall.Fragment3"
         android:label="fragment_3"
-        tools:layout="@layout/fragment_3" />
+        tools:layout="@layout/fragment_3" >
+        <action
+            android:id="@+id/action_fragment3_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment4"
         android:name="uz.context.pinterestapp.fragmentsall.Fragment4"
         android:label="fragment_4"
-        tools:layout="@layout/fragment_4" />
+        tools:layout="@layout/fragment_4" >
+        <action
+            android:id="@+id/action_fragment4_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment5"
         android:name="uz.context.pinterestapp.fragmentsall.Fragment5"
         android:label="fragment_5"
-        tools:layout="@layout/fragment_5" />
+        tools:layout="@layout/fragment_5" >
+        <action
+            android:id="@+id/action_fragment5_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment6"
         android:name="uz.context.pinterestapp.fragmentsall.Fragment6"
         android:label="fragment_6"
-        tools:layout="@layout/fragment_6" />
+        tools:layout="@layout/fragment_6" >
+        <action
+            android:id="@+id/action_fragment6_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

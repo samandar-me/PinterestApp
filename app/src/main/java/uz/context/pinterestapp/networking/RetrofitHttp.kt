@@ -1,4 +1,4 @@
-package com.example.pinterest.Networking
+package uz.context.pinterestapp.networking
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -6,7 +6,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uz.context.pinterestapp.networking.HomeService
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
@@ -52,7 +51,7 @@ object RetrofitHttp {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     var request = chain.request()
                     val builder = request.newBuilder()
-                    builder.addHeader("Authorization", "Client-ID r_PBgcCBLgDICSpQXjRHOPe7e0N0kK4frHbnE60dryE")
+                    builder.addHeader("Authorization", "Client-ID KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg")
                     request = builder.build()
                     return chain.proceed(request)
                 }

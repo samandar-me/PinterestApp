@@ -1,6 +1,6 @@
 package uz.context.pinterestapp.networking
 
-import com.example.pinterest.Networking.ResponseItem
+import uz.context.pinterestapp.model.ResponseItem
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -10,11 +10,18 @@ interface HomeService {
 //    https://api.unsplash.com/photos/random?count=5 █
 //      https://api.unsplash.com/users/samuelzeller/photos
 
-//    @GET("photos")
+
+    //fragment1 all
     @GET("photos/random?count=50")
 //    @GET("users/samuelzeller/photos")
-//    @GET("photos/random")
-    fun listPhotos(): Call<ArrayList<ResponseItem>>
+//    @GET("search/photos?page1&query= + animals "&Client-ID" + "KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg"")
+    fun listPhotos1(): Call<ArrayList<ResponseItem>>
+
+    //fragment1 all
+    @GET("photos/random?count=50")
+//    @GET("users/samuelzeller/photos")
+//    @GET("search/photos?page1&query= + animals "&Client-ID" + "KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg"")
+    fun listPhotos2(): Call<ArrayList<ResponseItem>>
 
     @GET("photos/{id}")
     fun singlePhotos(@Path("id")id:Int):Call<ResponseItem>

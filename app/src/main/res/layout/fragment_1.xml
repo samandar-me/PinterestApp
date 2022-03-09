@@ -23,5 +23,12 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <ProgressBar
+        android:visibility="visible"
+        android:id="@+id/progress_bar1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="150dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

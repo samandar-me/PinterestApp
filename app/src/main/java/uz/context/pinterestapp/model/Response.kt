@@ -1,4 +1,4 @@
-package com.example.pinterest.Networking
+package uz.context.pinterestapp.model
 
 import com.google.gson.annotations.SerializedName
 

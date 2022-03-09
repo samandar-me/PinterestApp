@@ -6,22 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.pinterest.Networking.ResponseItem
-import com.example.pinterest.Networking.RetrofitHttp
+import uz.context.pinterestapp.model.ResponseItem
+import uz.context.pinterestapp.networking.RetrofitHttp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter
+import uz.context.pinterestapp.model.GetDetailsInfo1
 
 class Fragment1 : Fragment() {
 
     var photos = ArrayList<ResponseItem>()
     lateinit var recyclerView: RecyclerView
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    lateinit var progressBar1: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,39 +36,54 @@ class Fragment1 : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerView1)
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh)
+        progressBar1 = view.findViewById(R.id.progress_bar1)
 
-        apiPosterListRetrofit()
+        apiPosterListRetrofitFragment1()
 
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            apiPosterListRetrofit()
-            refreshAdapter(photos)
+//            apiPosterListRetrofit()
+            photos.clear()
+            apiPosterListRetrofitFragment1()
+//            refreshAdapter(photos)
         }
 
         return view
     }
-    fun apiPosterListRetrofit(){
-        RetrofitHttp.posterService.listPhotos().enqueue(object : Callback<ArrayList<ResponseItem>> {
+
+    fun apiPosterListRetrofitFragment1(){
+        progressBar1.visibility = View.VISIBLE
+        RetrofitHttp.posterService.listPhotos1().enqueue(object : Callback<ArrayList<ResponseItem>> {
             override fun onResponse(call: Call<ArrayList<ResponseItem>>, response: Response<ArrayList<ResponseItem>>) {
                 photos.clear()
                 photos.addAll(response.body()!!)
                 swipeRefreshLayout.isRefreshing = false
-                //progressBar.visibility = View.GONE
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                progressBar1.visibility = View.GONE
                 refreshAdapter(photos)
             }
 
             override fun onFailure(call: Call<ArrayList<ResponseItem>>, t: Throwable) {
                 Log.d("@@@",t.message.toString())
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                progressBar1.visibility = View.GONE
             }
 
         })
     }
 
+
      fun refreshAdapter(photos: ArrayList<ResponseItem>){
-         val homeTwoAdapter = RetrofitGetAdapter(photos)
+         val homeTwoAdapter = RetrofitGetAdapter(requireContext(),photos)
          recyclerView.adapter = homeTwoAdapter
+
+         //adapterdan fragmentga intent qilish
+         homeTwoAdapter.itemCLick = {
+             Log.d("@@@","XATOLIK")
+
+
+
+             findNavController().navigate(R.id.detailFragment)
+         }
      }
 }
