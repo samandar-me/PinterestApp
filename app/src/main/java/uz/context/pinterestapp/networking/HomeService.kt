@@ -28,6 +28,7 @@ interface HomeService {
     //fragment6 all
     @GET("topics/animals/photos")
     fun listPhotos6(): Call<ArrayList<ResponseItem>>
+    //fragment3 all
 
 //    @GET("photos/{id}")
 //    fun singlePhotos(@Path("id")id:Int):Call<ResponseItem>
