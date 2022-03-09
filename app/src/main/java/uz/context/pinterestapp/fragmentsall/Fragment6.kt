@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.comix.overwatch.HiveProgressView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +27,7 @@ class Fragment6 : Fragment() {
     var photos = ArrayList<ResponseItem>()
     lateinit var recyclerView6: RecyclerView
     lateinit var swipeRefreshLayout6: SwipeRefreshLayout
-    lateinit var progressBar6: ProgressBar
+    lateinit var progressBar6: HiveProgressView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

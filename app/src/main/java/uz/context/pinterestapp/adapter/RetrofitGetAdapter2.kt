@@ -24,7 +24,6 @@ import uz.context.pinterestapp.model.ResponseItem
 class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     //adapterdan fragmentga intent qilish
-//    lateinit var itemCLick: ((ResponseItem) -> Unit)
     lateinit var itemCLick: ((ResponseItem) -> Unit)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -42,7 +41,9 @@ class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem
             val cardView = holder.card_view
 
             Glide.with(holder.itemView.context)
+//                .load(home.user?.profileImage?.large)
                 .load(home.urls?.thumb)
+//                .load(home.user?.social?.profile_images?.small)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
 

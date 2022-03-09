@@ -42,8 +42,8 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
             val cardView = holder.card_view
 
             Glide.with(holder.itemView.context)
-//                .load(home.urls?.thumb)
-                .load(home.urls?.small)
+                .load(home.urls?.thumb)
+//                .load(home.urls?.small)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
 

@@ -12,28 +12,33 @@ interface HomeService {
 
 
     //fragment1 all
-    @GET("photos/random?count=1000")
+    @GET("photos/random?count=100")
+//    @GET("/me")
 //    @GET("photos?page=1&query=shape")
     fun listPhotos1(): Call<ArrayList<ResponseItem>>
 
     //fragment2 all
     @GET("topics/wallpapers/photos")
+//    @GET("/me/links/photos")
+//    @GET("/me")
+//    @GET("topics/animals/photos")
+//    @GET("photos/random?count=1000")
     fun listPhotos2(): Call<ArrayList<ResponseItem>>
 
     //fragment6 all
     @GET("topics/animals/photos")
     fun listPhotos6(): Call<ArrayList<ResponseItem>>
 
-    @GET("photos/{id}")
-    fun singlePhotos(@Path("id")id:Int):Call<ResponseItem>
-
-    @POST("photos")
-    fun createPhotos(@Body post: ResponseItem):Call<ResponseItem>
-
-    @PUT("photos/{id}")
-    fun updatePhotos(@Path("id")id: Int,@Body post: ResponseItem):Call<ResponseItem>
-
-    @DELETE("photos/{id}")
-    fun deletePhotos(@Path("id")id:Int):Call<ResponseItem>
+//    @GET("photos/{id}")
+//    fun singlePhotos(@Path("id")id:Int):Call<ResponseItem>
+//
+//    @POST("photos")
+//    fun createPhotos(@Body post: ResponseItem):Call<ResponseItem>
+//
+//    @PUT("photos/{id}")
+//    fun updatePhotos(@Path("id")id: Int,@Body post: ResponseItem):Call<ResponseItem>
+//
+//    @DELETE("photos/{id}")
+//    fun deletePhotos(@Path("id")id:Int):Call<ResponseItem>
 
 }

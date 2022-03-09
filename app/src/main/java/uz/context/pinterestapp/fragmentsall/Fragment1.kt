@@ -5,13 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.comix.overwatch.HiveProgressView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +25,7 @@ class Fragment1 : Fragment() {
     var photos = ArrayList<ResponseItem>()
     lateinit var recyclerView: RecyclerView
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    lateinit var progressBar1: ProgressBar
+    lateinit var progressBar1: HiveProgressView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +43,7 @@ class Fragment1 : Fragment() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
 //            apiPosterListRetrofit()
-            photos.clear()
+//            photos.clear()
             apiPosterListRetrofitFragment1()
 //            refreshAdapter(photos)
         }
@@ -56,7 +56,7 @@ class Fragment1 : Fragment() {
         return view
     }
 
-    fun apiPosterListRetrofitFragment1() {
+    private fun apiPosterListRetrofitFragment1() {
         progressBar1.visibility = View.VISIBLE
         RetrofitHttp.posterService.listPhotos1()
             .enqueue(object : Callback<ArrayList<ResponseItem>> {
@@ -64,9 +64,9 @@ class Fragment1 : Fragment() {
                     call: Call<ArrayList<ResponseItem>>,
                     response: Response<ArrayList<ResponseItem>>
                 ) {
-                    photos.clear()
+//                    photos.clear()
                     if (response.body() != null)
-                    photos.addAll(response.body()!!)
+                        photos.addAll(response.body()!!)
                     else
                         Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
                     swipeRefreshLayout.isRefreshing = false
@@ -91,9 +91,6 @@ class Fragment1 : Fragment() {
         //adapterdan fragmentga intent qilish
         homeTwoAdapter.itemCLick = {
             Log.d("@@@", "XATOLIK")
-
-
-
             findNavController().navigate(R.id.detailFragment)
         }
     }
