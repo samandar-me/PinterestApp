@@ -15,11 +15,14 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestListener
 import com.google.android.material.imageview.ShapeableImageView
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.fragmentsall.DetailFragment
 import uz.context.pinterestapp.model.GetDetailsInfo1
 import uz.context.pinterestapp.model.ResponseItem
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>):
@@ -41,8 +44,9 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
             val iv_photo = holder.iv_photo
             val cardView = holder.card_view
 
-            Glide.with(holder.itemView.context)
+            Glide.with(context)
                 .load(home.urls?.thumb)
+                .placeholder(randomColor())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
 
@@ -72,5 +76,17 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
             iv_photo = view.findViewById(R.id.item_images1)
             card_view = view.findViewById(R.id.card_view1)
         }
+    }
+
+    private fun randomColor(): Int {
+        val random = Random()
+        val colorList = ArrayList<Int>()
+
+        colorList.add(R.color.random1)
+        colorList.add(R.color.random2)
+        colorList.add(R.color.random3)
+        colorList.add(R.color.random4)
+
+        return colorList[random.nextInt(colorList.size)]
     }
 }

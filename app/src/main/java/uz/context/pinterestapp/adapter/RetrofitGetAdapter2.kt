@@ -2,7 +2,6 @@ package uz.context.pinterestapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent.getIntent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.imageview.ShapeableImageView
 import uz.context.pinterestapp.R
-import uz.context.pinterestapp.fragmentsall.DetailFragment
 import uz.context.pinterestapp.model.GetDetailsInfo1
 import uz.context.pinterestapp.model.ResponseItem
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -39,10 +39,9 @@ class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem
             val iv_photo = holder.iv_photo
             val cardView = holder.card_view
 
-            Glide.with(holder.itemView.context)
-//                .load(home.user?.profileImage?.large)
+            Glide.with(context)
                 .load(home.urls?.thumb)
-//                .load(home.user?.social?.profile_images?.small)
+                .placeholder(R.drawable.img)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
 

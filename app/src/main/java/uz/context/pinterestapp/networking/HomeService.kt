@@ -19,11 +19,11 @@ interface HomeService {
 
     //fragment2 all
     @GET("topics/wallpapers/photos")
-//    @GET("/me/links/photos")
-//    @GET("/me")
-//    @GET("topics/animals/photos")
-//    @GET("photos/random?count=1000")
     fun listPhotos2(): Call<ArrayList<ResponseItem>>
+
+    //fragment3 all
+    @GET("search/collections?page=1&query=tourism")
+    fun listPhotos3(): Call<ArrayList<ResponseItem>>
 
     //fragment6 all
     @GET("topics/animals/photos")
