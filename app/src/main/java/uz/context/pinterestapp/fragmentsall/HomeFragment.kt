@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         viewPager2.adapter = homeAdapter
 
         tabLayout.addTab(tabLayout.newTab().setText("All"))
-        tabLayout.addTab(tabLayout.newTab().setText("Marvels"))
+        tabLayout.addTab(tabLayout.newTab().setText("Wallpapers"))
         tabLayout.addTab(tabLayout.newTab().setText("Tourism"))
         tabLayout.addTab(tabLayout.newTab().setText("Space"))
         tabLayout.addTab(tabLayout.newTab().setText("Horses"))

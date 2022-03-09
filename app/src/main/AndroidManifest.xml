@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PinterestApp">
         <activity
             android:name=".activities.MainActivity"
+
+            android:windowSoftInputMode="adjustPan"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

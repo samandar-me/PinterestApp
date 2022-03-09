@@ -17,6 +17,7 @@
             tools:listitem="@layout/home_recycler_item"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="2"
+            app:reverseLayout="false"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -12,16 +12,17 @@ interface HomeService {
 
 
     //fragment1 all
-    @GET("photos/random?count=50")
-//    @GET("users/samuelzeller/photos")
-//    @GET("search/photos?page1&query= + animals "&Client-ID" + "KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg"")
+    @GET("photos/random?count=1000")
+//    @GET("photos?page=1&query=shape")
     fun listPhotos1(): Call<ArrayList<ResponseItem>>
 
-    //fragment1 all
-    @GET("photos/random?count=50")
-//    @GET("users/samuelzeller/photos")
-//    @GET("search/photos?page1&query= + animals "&Client-ID" + "KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg"")
+    //fragment2 all
+    @GET("topics/wallpapers/photos")
     fun listPhotos2(): Call<ArrayList<ResponseItem>>
+
+    //fragment6 all
+    @GET("topics/animals/photos")
+    fun listPhotos6(): Call<ArrayList<ResponseItem>>
 
     @GET("photos/{id}")
     fun singlePhotos(@Path("id")id:Int):Call<ResponseItem>

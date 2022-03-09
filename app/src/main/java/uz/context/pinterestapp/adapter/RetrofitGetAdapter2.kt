@@ -21,14 +21,14 @@ import uz.context.pinterestapp.model.GetDetailsInfo1
 import uz.context.pinterestapp.model.ResponseItem
 
 
-class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     //adapterdan fragmentga intent qilish
 //    lateinit var itemCLick: ((ResponseItem) -> Unit)
     lateinit var itemCLick: ((ResponseItem) -> Unit)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.home_recycler_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.home_recycler_item2,parent,false)
         return HomeViewHolder(view)
     }
 
@@ -42,8 +42,7 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
             val cardView = holder.card_view
 
             Glide.with(holder.itemView.context)
-//                .load(home.urls?.thumb)
-                .load(home.urls?.small)
+                .load(home.urls?.thumb)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
 
@@ -72,9 +71,9 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
         var card_view: CardView
 
         init {
-            tv_title = view.findViewById(R.id.tv_title)
-            iv_photo = view.findViewById(R.id.item_images1)
-            card_view = view.findViewById(R.id.card_view1)
+            tv_title = view.findViewById(R.id.title2)
+            iv_photo = view.findViewById(R.id.item_images2)
+            card_view = view.findViewById(R.id.card_view2)
         }
     }
 }
