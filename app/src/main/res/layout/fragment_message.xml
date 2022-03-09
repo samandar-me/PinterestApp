@@ -13,7 +13,7 @@
         android:paddingVertical="6dp"
         app:tabGravity="start"
         app:tabIndicator="@drawable/back_black"
-        app:tabIndicatorAnimationMode="linear"
+        app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/black"
         app:tabIndicatorGravity="stretch"
         app:tabMode="fixed"

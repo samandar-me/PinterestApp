@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitHttp {
     val IS_TESTER = true
-    val SERVER_DEVELOPMENT = "https://api.unsplash.com/"
+    const val SERVER_DEVELOPMENT = "https://api.unsplash.com/"
     val SERVER_PRODUCTION = "https://62219d1bafd560ea69b4e0dd.mockapi.io/"
 
     private val client = getClient()
@@ -38,7 +38,7 @@ object RetrofitHttp {
         })
         .addInterceptor(Interceptor { chain ->
             val builder = chain.request().newBuilder()
-            builder.header("Authorization", "Client-ID KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg")
+            builder.header("Authorization", "Client-ID lOwYkRhXb7OgyGquor9WgJsk1uBNU4zhYjtlWfvMFqo")
             chain.proceed(builder.build())
         })
         .build()
@@ -46,15 +46,12 @@ object RetrofitHttp {
     fun <T> createServiceWithAuth(service: Class<T>?): T {
 
         val newClient =
-            client.newBuilder().addInterceptor(object : Interceptor {
-                @Throws(IOException::class)
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    var request = chain.request()
-                    val builder = request.newBuilder()
-                    builder.addHeader("Authorization", "Client-ID KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg")
-                    request = builder.build()
-                    return chain.proceed(request)
-                }
+            client.newBuilder().addInterceptor(Interceptor { chain ->
+                var request = chain.request()
+                val builder = request.newBuilder()
+                builder.addHeader("Authorization", "Client-ID lOwYkRhXb7OgyGquor9WgJsk1uBNU4zhYjtlWfvMFqo")
+                request = builder.build()
+                chain.proceed(request)
             }).build()
         val newRetrofit = retrofit.newBuilder().client(newClient).build()
         return newRetrofit.create(service!!)

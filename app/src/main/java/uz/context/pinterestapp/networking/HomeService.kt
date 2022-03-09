@@ -12,7 +12,7 @@ interface HomeService {
 
 
     //fragment1 all
-    @GET("photos/random?count=100")
+    @GET("photos/random?count=1000")
 //    @GET("/me")
 //    @GET("photos?page=1&query=shape")
     fun listPhotos1(): Call<ArrayList<ResponseItem>>

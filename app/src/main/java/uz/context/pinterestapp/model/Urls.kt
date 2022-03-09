@@ -2,6 +2,7 @@ package uz.context.pinterestapp.model
 
 import com.google.gson.annotations.SerializedName
 
+
 data class Urls(
 
     @field:SerializedName("small")

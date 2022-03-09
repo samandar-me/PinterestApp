@@ -23,7 +23,6 @@ import uz.context.pinterestapp.model.ResponseItem
 
 class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    //adapterdan fragmentga intent qilish
     lateinit var itemCLick: ((ResponseItem) -> Unit)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/activity_main.xml" value="0.2094017094017094" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_1.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_2.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_detail.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable-v24/tab_main_background.xml" value="0.118" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable/back_black.xml" value="0.1395" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable/circle_shape.xml" value="0.118" />
@@ -12,7 +15,6 @@
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_1.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_3.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_5.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_6.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
