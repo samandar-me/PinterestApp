@@ -40,7 +40,7 @@ class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem
             val cardView = holder.card_view
 
             Glide.with(context)
-                .load(home.urls?.thumb)
+                .load(home.urls?.small)
                 .placeholder(R.drawable.img)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
@@ -50,7 +50,7 @@ class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem
 
             cardView.setOnClickListener {
                 //adapterdan fragmentga intent qilish
-                GetDetailsInfo1.title = home.description.toString()
+//                GetDetailsInfo1.title = home.description.toString()
                 GetDetailsInfo1.links = home.urls?.small.toString()
                 itemCLick.invoke(home)
                 Toast.makeText(context, "${home.description} ${home.urls?.thumb}", Toast.LENGTH_SHORT).show()

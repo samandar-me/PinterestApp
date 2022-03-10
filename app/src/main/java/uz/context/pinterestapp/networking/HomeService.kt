@@ -22,8 +22,11 @@ interface HomeService {
     fun listPhotos2(): Call<ArrayList<ResponseItem>>
 
     //fragment3 all
-    @GET("search/collections?page=1&query=tourism")
-    fun listPhotos3(): Call<ArrayList<ResponseItem>>
+//    @GET("search/collections?page=1&query=tourism")
+//    fun listPhotos3(): Call<ArrayList<ResponseItem>>
+
+    @GET("search/photos?")
+    fun searchPhotos(@Query("query") search: String) : Call<ArrayList<ResponseItem>>
 
     //fragment6 all
     @GET("topics/animals/photos")
