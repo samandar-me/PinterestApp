@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo">todo</string>
     <string name="_308">308</string>
+    <string name="search_for_ideas">Search for ideas</string>
+    <string name="idea">Ideas for you</string>
 </resources>
