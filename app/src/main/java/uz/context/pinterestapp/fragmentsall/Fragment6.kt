@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -19,14 +20,19 @@ import retrofit2.Response
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter2
+import uz.context.pinterestapp.adapter.RetrofitGetAdapter3
 import uz.context.pinterestapp.model.ResponseItem
+import uz.context.pinterestapp.modelSearch.Result
+import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
 
 class Fragment6 : Fragment() {
 
-    var photos = ArrayList<ResponseItem>()
+    var count = 1
+    var photos = ArrayList<Result>()
     lateinit var recyclerView6: RecyclerView
     lateinit var swipeRefreshLayout6: SwipeRefreshLayout
+    private lateinit var adapter: RetrofitGetAdapter3
     lateinit var progressBar6: HiveProgressView
 
     override fun onCreateView(
@@ -39,55 +45,67 @@ class Fragment6 : Fragment() {
     }
 
     private fun initViews(view: View) {
+
         recyclerView6 = view.findViewById(R.id.recyclerView6)
         swipeRefreshLayout6 = view.findViewById(R.id.swipe_refresh6)
         progressBar6 = view.findViewById(R.id.progress_bar6)
 
         apiPosterListRetrofitFragment6()
 
-        swipeRefreshLayout6.setOnRefreshListener {
-            swipeRefreshLayout6.isRefreshing = false
-            photos.clear()
-            apiPosterListRetrofitFragment6()
-        }
+        recyclerView6.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    count++
+                    apiPosterListRetrofitFragment6()
+                }
+            }
+        })
+
 
         recyclerView6.setHasFixedSize(true)
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView6.layoutManager = layoutManager
+
+        swipeRefreshLayout6.setOnRefreshListener {
+            count++
+            photos.clear()
+            swipeRefreshLayout6.isRefreshing = false
+            apiPosterListRetrofitFragment6()
+            adapter.notifyDataSetChanged()
+        }
     }
 
-    private fun apiPosterListRetrofitFragment6(){
-        progressBar6.visibility = View.VISIBLE
-        RetrofitHttp.posterService.listPhotos6().enqueue(object :
-            Callback<ArrayList<ResponseItem>> {
-            override fun onResponse(call: Call<ArrayList<ResponseItem>>, response: Response<ArrayList<ResponseItem>>) {
-                photos.clear()
-                if (response.body() != null)
-                    photos.addAll(response.body()!!)
+    private fun apiPosterListRetrofitFragment6() {
+        progressBar6.isVisible = true
+
+        RetrofitHttp.posterService.searchPhotos(count,"animals").enqueue(object : Callback<Welcome> {
+            override fun onResponse(
+                call: Call<Welcome>,
+                response: Response<Welcome>
+            ) {
+                if (response.body() != null) {
+                    photos.addAll(response.body()!!.results!!)
+                    refreshAdapter(photos)
+                    progressBar6.isVisible = false
+                }
                 else
                     Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
-                swipeRefreshLayout6.isRefreshing = false
-                progressBar6.visibility = View.GONE
-                refreshAdapter(photos)
             }
 
-            override fun onFailure(call: Call<ArrayList<ResponseItem>>, t: Throwable) {
-                Log.d("@@@",t.message.toString())
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-                progressBar6.visibility = View.GONE
+            override fun onFailure(call: Call<Welcome>, t: Throwable) {
+                Toast.makeText(requireContext(), "Something error!", Toast.LENGTH_SHORT).show()
+                progressBar6.isVisible = false
+                t.printStackTrace()
             }
-
         })
     }
 
 
-    fun refreshAdapter(photos: ArrayList<ResponseItem>){
-        val homeTwoAdapter = RetrofitGetAdapter2(requireContext(),photos)
-        recyclerView6.adapter = homeTwoAdapter
-
-        //adapterdan fragmentga intent qilish
-        homeTwoAdapter.itemCLick = {
+    fun refreshAdapter(photos: ArrayList<Result>) {
+        adapter = RetrofitGetAdapter3(requireContext(), photos)
+        recyclerView6.adapter = adapter
+        adapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)
         }
     }

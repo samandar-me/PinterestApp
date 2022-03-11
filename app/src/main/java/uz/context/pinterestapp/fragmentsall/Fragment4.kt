@@ -48,12 +48,6 @@ class Fragment4 : Fragment() {
 
         apiPosterListRetrofitFragment4()
 
-
-        recyclerView4.setHasFixedSize(true)
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        recyclerView4.layoutManager = layoutManager
-
         recyclerView4.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
@@ -62,7 +56,14 @@ class Fragment4 : Fragment() {
                 }
             }
         })
+
+        recyclerView4.setHasFixedSize(true)
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        recyclerView4.layoutManager = layoutManager
+
         swipeRefreshLayout4.setOnRefreshListener {
+            count++
             photos.clear()
             swipeRefreshLayout4.isRefreshing = false
             apiPosterListRetrofitFragment4()

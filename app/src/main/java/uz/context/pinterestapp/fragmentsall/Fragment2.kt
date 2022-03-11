@@ -5,8 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -19,15 +19,19 @@ import retrofit2.Response
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter2
+import uz.context.pinterestapp.adapter.RetrofitGetAdapter3
 import uz.context.pinterestapp.model.ResponseItem
+import uz.context.pinterestapp.modelSearch.Result
+import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
 
 class Fragment2 : Fragment() {
 
-    var photos = ArrayList<ResponseItem>()
+    var count = 1
+    var photos = ArrayList<Result>()
     lateinit var recyclerView2: RecyclerView
-    private lateinit var homeTwoAdapter: RetrofitGetAdapter2
     lateinit var swipeRefreshLayout2: SwipeRefreshLayout
+    private lateinit var searchAdapter: RetrofitGetAdapter3
     lateinit var progressBar2: HiveProgressView
 
     override fun onCreateView(
@@ -41,65 +45,69 @@ class Fragment2 : Fragment() {
 
     private fun initViews(view: View) {
 
-
         recyclerView2 = view.findViewById(R.id.recyclerView2)
         swipeRefreshLayout2 = view.findViewById(R.id.swipe_refresh2)
         progressBar2 = view.findViewById(R.id.progress_bar2)
 
         apiPosterListRetrofitFragment2()
 
+        recyclerView2.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    count++
+                    apiPosterListRetrofitFragment2()
+                }
+            }
+        })
+
         recyclerView2.setHasFixedSize(true)
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView2.layoutManager = layoutManager
 
-        recyclerView2.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (!recyclerView.canScrollVertically(1)) {
-                    apiPosterListRetrofitFragment2()
-                }
-            }
-        })
     }
 
-    fun apiPosterListRetrofitFragment2(){
-        progressBar2.visibility = View.VISIBLE
-        RetrofitHttp.posterService.listPhotos2().enqueue(object :
-            Callback<ArrayList<ResponseItem>> {
-            override fun onResponse(call: Call<ArrayList<ResponseItem>>, response: Response<ArrayList<ResponseItem>>) {
-                if (response.body() != null)
-                    photos.addAll(response.body()!!)
-                else
-                    Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
-                swipeRefreshLayout2.isRefreshing = false
-                progressBar2.visibility = View.GONE
-                refreshAdapter(photos)
-            }
+    private fun apiPosterListRetrofitFragment2() {
+        progressBar2.isVisible = true
 
-            override fun onFailure(call: Call<ArrayList<ResponseItem>>, t: Throwable) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-                progressBar2.visibility = View.GONE
-            }
+//        RetrofitHttp.posterService.searchPhotos("cars").enqueue(object : Callback<ArrayList<ResponseItem>> {
+        RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
+            .enqueue(object : Callback<Welcome> {
+                override fun onResponse(
+                    call: Call<Welcome>,
+                    response: Response<Welcome>
+                ) {
+                    if (response.body() != null) {
+                        photos.addAll(response.body()!!.results!!)
+                        refreshAdapter(photos)
+                        progressBar2.isVisible = false
+                    }
+                    else
+                        Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
+                }
 
-        })
+                override fun onFailure(call: Call<Welcome>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Something error!", Toast.LENGTH_SHORT).show()
+                    progressBar2.isVisible = false
+                    t.printStackTrace()
+                }
+            })
 
         swipeRefreshLayout2.setOnRefreshListener {
-            photos.clear()
             swipeRefreshLayout2.isRefreshing = false
+            count++
+            photos.clear()
             apiPosterListRetrofitFragment2()
-            homeTwoAdapter.notifyDataSetChanged()
+            searchAdapter.notifyDataSetChanged()
         }
-
     }
 
 
-    fun refreshAdapter(photos: ArrayList<ResponseItem>){
-        homeTwoAdapter = RetrofitGetAdapter2(requireContext(),photos)
-        recyclerView2.adapter = homeTwoAdapter
-
-        homeTwoAdapter.itemCLick = {
+    fun refreshAdapter(photos: ArrayList<Result>) {
+        searchAdapter = RetrofitGetAdapter3(requireContext(), photos)
+        recyclerView2.adapter = searchAdapter
+        searchAdapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)
         }
     }
-
 }

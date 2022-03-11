@@ -35,7 +35,7 @@ class RetrofitGetAdapter2(var context: Context, var items: ArrayList<ResponseIte
         val home = items[position]
 
         if (holder is HomeViewHolder) {
-            val tv_title = holder.tv_title
+            val tvTitle = holder.tvTitle
             val iv_photo = holder.iv_photo
             val cardView = holder.card_view
 
@@ -45,14 +45,11 @@ class RetrofitGetAdapter2(var context: Context, var items: ArrayList<ResponseIte
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(iv_photo)
 
-            tv_title.text = home.description
-
-
+            tvTitle.text = home.toString()
             cardView.setOnClickListener {
                 GetDetailsInfo.links = home.urls?.small.toString()
                 itemCLick.invoke(home)
             }
-
         }
     }
 
@@ -62,14 +59,9 @@ class RetrofitGetAdapter2(var context: Context, var items: ArrayList<ResponseIte
 
     @SuppressLint("CutPasteId")
     class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var tv_title: TextView
-        var iv_photo: ShapeableImageView
-        var card_view: CardView
+        var tvTitle: TextView = view.findViewById(R.id.title2)
+        var iv_photo: ShapeableImageView = view.findViewById(R.id.item_images2)
+        var card_view: CardView = view.findViewById(R.id.card_view2)
 
-        init {
-            tv_title = view.findViewById(R.id.title2)
-            iv_photo = view.findViewById(R.id.item_images2)
-            card_view = view.findViewById(R.id.card_view2)
-        }
     }
 }

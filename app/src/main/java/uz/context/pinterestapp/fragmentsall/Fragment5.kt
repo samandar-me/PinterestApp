@@ -47,12 +47,6 @@ class Fragment5 : Fragment() {
 
         apiPosterListRetrofitFragment5()
 
-
-        recyclerView5.setHasFixedSize(true)
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        recyclerView5.layoutManager = layoutManager
-
         recyclerView5.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
@@ -61,7 +55,15 @@ class Fragment5 : Fragment() {
                 }
             }
         })
+
+        recyclerView5.setHasFixedSize(true)
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        recyclerView5.layoutManager = layoutManager
+
+
         swipeRefreshLayout5.setOnRefreshListener {
+            count++
             photos.clear()
             swipeRefreshLayout5.isRefreshing = false
             apiPosterListRetrofitFragment5()
@@ -72,7 +74,6 @@ class Fragment5 : Fragment() {
     private fun apiPosterListRetrofitFragment5() {
         progressBar5.isVisible = true
 
-//        RetrofitHttp.posterService.searchPhotos("cars").enqueue(object : Callback<ArrayList<ResponseItem>> {
         RetrofitHttp.posterService.searchPhotos(count,"horses").enqueue(object : Callback<Welcome> {
             override fun onResponse(
                 call: Call<Welcome>,

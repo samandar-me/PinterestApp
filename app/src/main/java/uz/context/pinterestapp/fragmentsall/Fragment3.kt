@@ -47,12 +47,6 @@ class Fragment3 : Fragment() {
 
         apiPosterListRetrofitFragment3()
 
-
-        recyclerView3.setHasFixedSize(true)
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        recyclerView3.layoutManager = layoutManager
-
         recyclerView3.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
@@ -61,6 +55,12 @@ class Fragment3 : Fragment() {
                 }
             }
         })
+
+        recyclerView3.setHasFixedSize(true)
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        recyclerView3.layoutManager = layoutManager
+
     }
 
     private fun apiPosterListRetrofitFragment3() {
@@ -91,6 +91,7 @@ class Fragment3 : Fragment() {
 
         swipeRefreshLayout3.setOnRefreshListener {
             swipeRefreshLayout3.isRefreshing = false
+            count++
             photos.clear()
             apiPosterListRetrofitFragment3()
             searchAdapter.notifyDataSetChanged()
