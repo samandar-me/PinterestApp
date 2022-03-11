@@ -19,6 +19,7 @@
             android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/textViewSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/app_name"

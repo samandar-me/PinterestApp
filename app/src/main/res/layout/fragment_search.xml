@@ -36,7 +36,7 @@
         android:id="@+id/recyclerViewSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/textViewSearch" />
+        android:layout_below="@+id/textViewSearch"
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>

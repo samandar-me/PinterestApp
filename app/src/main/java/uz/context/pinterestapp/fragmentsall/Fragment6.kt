@@ -34,7 +34,11 @@ class Fragment6 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_6, container, false)
+        initViews(view)
+        return view
+    }
 
+    private fun initViews(view: View) {
         recyclerView6 = view.findViewById(R.id.recyclerView6)
         swipeRefreshLayout6 = view.findViewById(R.id.swipe_refresh6)
         progressBar6 = view.findViewById(R.id.progress_bar6)
@@ -51,11 +55,9 @@ class Fragment6 : Fragment() {
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView6.layoutManager = layoutManager
-
-        return view
     }
 
-    fun apiPosterListRetrofitFragment6(){
+    private fun apiPosterListRetrofitFragment6(){
         progressBar6.visibility = View.VISIBLE
         RetrofitHttp.posterService.listPhotos6().enqueue(object :
             Callback<ArrayList<ResponseItem>> {
@@ -86,10 +88,6 @@ class Fragment6 : Fragment() {
 
         //adapterdan fragmentga intent qilish
         homeTwoAdapter.itemCLick = {
-            Log.d("@@@","XATOLIK")
-
-
-
             findNavController().navigate(R.id.detailFragment)
         }
     }

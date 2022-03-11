@@ -49,7 +49,7 @@ object RetrofitHttp {
             client.newBuilder().addInterceptor(Interceptor { chain ->
                 var request = chain.request()
                 val builder = request.newBuilder()
-                builder.addHeader("Authorization", "Client-ID lOwYkRhXb7OgyGquor9WgJsk1uBNU4zhYjtlWfvMFqo")
+                builder.addHeader("Authorization", "Client-ID KR7Tcw-RNnurIM-7JDGj9S-5DUeFhVTx1YNxoR-vRkg")
                 request = builder.build()
                 chain.proceed(request)
             }).build()

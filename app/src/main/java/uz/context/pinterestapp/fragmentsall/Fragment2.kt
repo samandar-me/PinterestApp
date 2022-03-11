@@ -26,6 +26,7 @@ class Fragment2 : Fragment() {
 
     var photos = ArrayList<ResponseItem>()
     lateinit var recyclerView2: RecyclerView
+    private lateinit var homeTwoAdapter: RetrofitGetAdapter2
     lateinit var swipeRefreshLayout2: SwipeRefreshLayout
     lateinit var progressBar2: HiveProgressView
 
@@ -34,6 +35,12 @@ class Fragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_2, container, false)
+        initViews(view)
+        return view
+    }
+
+    private fun initViews(view: View) {
+
 
         recyclerView2 = view.findViewById(R.id.recyclerView2)
         swipeRefreshLayout2 = view.findViewById(R.id.swipe_refresh2)
@@ -41,18 +48,18 @@ class Fragment2 : Fragment() {
 
         apiPosterListRetrofitFragment2()
 
-        swipeRefreshLayout2.setOnRefreshListener {
-            swipeRefreshLayout2.isRefreshing = false
-            photos.clear()
-            apiPosterListRetrofitFragment2()
-        }
-
         recyclerView2.setHasFixedSize(true)
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView2.layoutManager = layoutManager
 
-        return view
+        recyclerView2.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    apiPosterListRetrofitFragment2()
+                }
+            }
+        })
     }
 
     fun apiPosterListRetrofitFragment2(){
@@ -60,7 +67,6 @@ class Fragment2 : Fragment() {
         RetrofitHttp.posterService.listPhotos2().enqueue(object :
             Callback<ArrayList<ResponseItem>> {
             override fun onResponse(call: Call<ArrayList<ResponseItem>>, response: Response<ArrayList<ResponseItem>>) {
-                photos.clear()
                 if (response.body() != null)
                     photos.addAll(response.body()!!)
                 else
@@ -71,23 +77,27 @@ class Fragment2 : Fragment() {
             }
 
             override fun onFailure(call: Call<ArrayList<ResponseItem>>, t: Throwable) {
-                Log.d("@@@",t.message.toString())
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 progressBar2.visibility = View.GONE
             }
 
         })
+
+        swipeRefreshLayout2.setOnRefreshListener {
+            photos.clear()
+            swipeRefreshLayout2.isRefreshing = false
+            apiPosterListRetrofitFragment2()
+            homeTwoAdapter.notifyDataSetChanged()
+        }
+
     }
 
 
     fun refreshAdapter(photos: ArrayList<ResponseItem>){
-        val homeTwoAdapter = RetrofitGetAdapter2(requireContext(),photos)
+        homeTwoAdapter = RetrofitGetAdapter2(requireContext(),photos)
         recyclerView2.adapter = homeTwoAdapter
 
-        //adapterdan fragmentga intent qilish
         homeTwoAdapter.itemCLick = {
-            Log.d("@@@","XATOLIK")
-
             findNavController().navigate(R.id.detailFragment)
         }
     }

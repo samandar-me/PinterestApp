@@ -53,6 +53,7 @@ class Fragment1 : Fragment() {
             swipeRefreshLayout.isRefreshing = false
             photos.clear()
             apiPosterListRetrofitFragment1()
+            retrofitGetAdapter.notifyDataSetChanged()
         }
 
         recyclerView.setHasFixedSize(true)

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import uz.context.pinterestapp.R
-import uz.context.pinterestapp.model.GetDetailsInfo1
+import uz.context.pinterestapp.util.GetDetailsInfo
 
 class DetailFragment : Fragment() {
     lateinit var textView: TextView
@@ -30,10 +29,10 @@ class DetailFragment : Fragment() {
         textView = view.findViewById(R.id.text_view)
         imageView = view.findViewById(R.id.image_view)
 
-        textView.text = GetDetailsInfo1.title
+        textView.text = GetDetailsInfo.title
 
         Glide.with(view)
-            .load(GetDetailsInfo1.links)
+            .load(GetDetailsInfo.links)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(imageView)
 

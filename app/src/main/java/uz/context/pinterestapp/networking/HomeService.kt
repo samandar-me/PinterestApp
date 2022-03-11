@@ -1,37 +1,37 @@
 package uz.context.pinterestapp.networking
 
-import uz.context.pinterestapp.model.ResponseItem
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
+import uz.context.pinterestapp.model.ResponseItem
+import uz.context.pinterestapp.modelSearch.Welcome
 
 interface HomeService {
 
-//    https://api.unsplash.com/search/photos?query=minimal
-//    https://api.unsplash.com/photos/random?count=5 █
-//      https://api.unsplash.com/users/samuelzeller/photos
-
-
     //fragment1 all
     @GET("photos/random?count=1000")
-//    @GET("/me")
-//    @GET("photos?page=1&query=shape")
     fun listPhotos1(): Call<ArrayList<ResponseItem>>
 
     //fragment2 all
     @GET("topics/wallpapers/photos")
     fun listPhotos2(): Call<ArrayList<ResponseItem>>
 
-    //fragment3 all
-//    @GET("search/collections?page=1&query=tourism")
-//    fun listPhotos3(): Call<ArrayList<ResponseItem>>
 
-    @GET("search/photos?")
-    fun searchPhotos(@Query("query") search: String) : Call<ArrayList<ResponseItem>>
+//    @GET("search/photos?")
+////    @GET("search/photos?page=2&query=tourism")
+//    fun searchPhotos(@Query("query") search: String) : Call<Welcome>
+////    fun searchPhotos() : Call<Welcome>
 
     //fragment6 all
     @GET("topics/animals/photos")
     fun listPhotos6(): Call<ArrayList<ResponseItem>>
     //fragment3 all
+
+
+    @GET("search/photos?page=1&per_page=19&query=")
+    fun searchPhotos(@Query("page") page: Int, @Query("query") search: String): Call<Welcome>
+//    fun searchPhotos() : Call<Welcome>
+
 
 //    @GET("photos/{id}")
 //    fun singlePhotos(@Path("id")id:Int):Call<ResponseItem>

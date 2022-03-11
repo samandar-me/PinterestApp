@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,18 +14,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.imageview.ShapeableImageView
 import uz.context.pinterestapp.R
-import uz.context.pinterestapp.model.GetDetailsInfo1
+import uz.context.pinterestapp.util.GetDetailsInfo
 import uz.context.pinterestapp.model.ResponseItem
 import java.util.*
-import kotlin.collections.ArrayList
 
 
-class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RetrofitGetAdapter2(var context: Context, var items: ArrayList<ResponseItem>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var itemCLick: ((ResponseItem) -> Unit)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.home_recycler_item2,parent,false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.home_recycler_item2, parent, false)
         return HomeViewHolder(view)
     }
 
@@ -49,11 +49,8 @@ class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem
 
 
             cardView.setOnClickListener {
-                //adapterdan fragmentga intent qilish
-//                GetDetailsInfo1.title = home.description.toString()
-                GetDetailsInfo1.links = home.urls?.small.toString()
+                GetDetailsInfo.links = home.urls?.small.toString()
                 itemCLick.invoke(home)
-                Toast.makeText(context, "${home.description} ${home.urls?.thumb}", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -64,7 +61,7 @@ class RetrofitGetAdapter2(var context: Context, var items:ArrayList<ResponseItem
     }
 
     @SuppressLint("CutPasteId")
-    class HomeViewHolder(view: View):RecyclerView.ViewHolder(view){
+    class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tv_title: TextView
         var iv_photo: ShapeableImageView
         var card_view: CardView
