@@ -17,7 +17,7 @@ import uz.context.pinterestapp.modelSearch.Result
 class RetrofitGetAdapter3(private val context: Context, private val lists: ArrayList<Result>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var itemCLick: ((Result) -> Unit)
+     lateinit var itemCLick: ((Result) -> Unit)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.home_recycler_item2, parent, false)

@@ -68,7 +68,9 @@ class Fragment2 : Fragment() {
         progressBar2.isVisible = true
 
 //        RetrofitHttp.posterService.searchPhotos("cars").enqueue(object : Callback<ArrayList<ResponseItem>> {
-        RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
+//        RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
+//        RetrofitHttp.posterService.searchPhotos(count, "woman carrying baby while walking")
+        RetrofitHttp.posterService.searchPhotos(count, "wallpapers")
             .enqueue(object : Callback<Welcome> {
                 override fun onResponse(
                     call: Call<Welcome>,

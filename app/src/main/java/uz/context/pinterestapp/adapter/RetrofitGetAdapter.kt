@@ -3,6 +3,7 @@ package uz.context.pinterestapp.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,7 @@ import uz.context.pinterestapp.modelSearch.Result
 import kotlin.collections.ArrayList
 
 
-class RetrofitGetAdapter(var context: Context, var items: ArrayList<Result>):
+class RetrofitGetAdapter(var context: Context, var items: ArrayList<ResponseItem>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var itemCLick: ((ResponseItem) -> Unit)
@@ -54,6 +55,7 @@ class RetrofitGetAdapter(var context: Context, var items: ArrayList<Result>):
                 GetDetailsInfo.id = home.id.toString()
                 GetDetailsInfo.title = home.description.toString()
                 GetDetailsInfo.links = home.urls?.small.toString()
+                Log.d("111@@@",home.id.toString())
                 itemCLick.invoke(ResponseItem())
             }
 
