@@ -27,6 +27,7 @@ import uz.context.pinterestapp.networking.RetrofitHttp
 
 class Fragment2 : Fragment() {
 
+    ////////////
     var count = 1
     var photos = ArrayList<Result>()
     lateinit var recyclerView2: RecyclerView
