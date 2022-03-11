@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import uz.context.pinterestapp.R
-import uz.context.pinterestapp.adapter.RetrofitGetAdapter3
+import uz.context.pinterestapp.adapter.RetrofitGetAdapter2
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
@@ -27,7 +27,7 @@ class Fragment5 : Fragment() {
     var photos = ArrayList<Result>()
     lateinit var recyclerView5: RecyclerView
     lateinit var swipeRefreshLayout5: SwipeRefreshLayout
-    private lateinit var adapter: RetrofitGetAdapter3
+    private lateinit var adapter: RetrofitGetAdapter2
     lateinit var progressBar5: HiveProgressView
 
     override fun onCreateView(
@@ -98,7 +98,7 @@ class Fragment5 : Fragment() {
 
 
     fun refreshAdapter(photos: ArrayList<Result>) {
-        adapter = RetrofitGetAdapter3(requireContext(), photos)
+        adapter = RetrofitGetAdapter2(requireContext(), photos)
         recyclerView5.adapter = adapter
         adapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)

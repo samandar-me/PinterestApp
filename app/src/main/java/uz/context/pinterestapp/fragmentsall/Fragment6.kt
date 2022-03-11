@@ -1,12 +1,10 @@
 package uz.context.pinterestapp.fragmentsall
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -18,10 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import uz.context.pinterestapp.R
-import uz.context.pinterestapp.adapter.RetrofitGetAdapter
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter2
-import uz.context.pinterestapp.adapter.RetrofitGetAdapter3
-import uz.context.pinterestapp.model.ResponseItem
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
@@ -32,7 +27,7 @@ class Fragment6 : Fragment() {
     var photos = ArrayList<Result>()
     lateinit var recyclerView6: RecyclerView
     lateinit var swipeRefreshLayout6: SwipeRefreshLayout
-    private lateinit var adapter: RetrofitGetAdapter3
+    private lateinit var adapter: RetrofitGetAdapter2
     lateinit var progressBar6: HiveProgressView
 
     override fun onCreateView(
@@ -103,7 +98,7 @@ class Fragment6 : Fragment() {
 
 
     fun refreshAdapter(photos: ArrayList<Result>) {
-        adapter = RetrofitGetAdapter3(requireContext(), photos)
+        adapter = RetrofitGetAdapter2(requireContext(), photos)
         recyclerView6.adapter = adapter
         adapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)

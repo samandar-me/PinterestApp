@@ -17,7 +17,7 @@ import uz.context.pinterestapp.modelSearch.Result
 class RetrofitGetAdapter3(private val context: Context, private val lists: ArrayList<Result>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    lateinit var itemCLick: ((Result) -> Unit)
+    private lateinit var itemCLick: ((Result) -> Unit)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.home_recycler_item2, parent, false)
@@ -37,9 +37,10 @@ class RetrofitGetAdapter3(private val context: Context, private val lists: Array
                     .into(imageView)
             }
             holder.carView.setOnClickListener {
-                itemCLick.invoke(list)
+                GetDetailsInfo.id = list.id
                 GetDetailsInfo.title = list.description.toString()
                 GetDetailsInfo.links = list.urls!!.small
+                itemCLick.invoke(list)
             }
         }
     }

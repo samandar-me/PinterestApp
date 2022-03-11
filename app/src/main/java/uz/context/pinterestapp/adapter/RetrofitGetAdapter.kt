@@ -18,10 +18,11 @@ import uz.context.pinterestapp.R
 import uz.context.pinterestapp.util.RandomColor
 import uz.context.pinterestapp.util.GetDetailsInfo
 import uz.context.pinterestapp.model.ResponseItem
+import uz.context.pinterestapp.modelSearch.Result
 import kotlin.collections.ArrayList
 
 
-class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>):
+class RetrofitGetAdapter(var context: Context, var items: ArrayList<Result>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var itemCLick: ((ResponseItem) -> Unit)
@@ -50,10 +51,9 @@ class RetrofitGetAdapter(var context: Context, var items:ArrayList<ResponseItem>
 
 
             cardView.setOnClickListener {
+                GetDetailsInfo.id = home.id.toString()
                 GetDetailsInfo.title = home.description.toString()
                 GetDetailsInfo.links = home.urls?.small.toString()
-//                itemCLick.invoke(home)
-//                itemCLick.notify()
                 itemCLick.invoke(ResponseItem())
             }
 

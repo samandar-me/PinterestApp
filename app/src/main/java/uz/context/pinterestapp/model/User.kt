@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
 
+    @field:SerializedName("username")
+    val username: String? = null,
+
     @field:SerializedName("total_photos")
     val totalPhotos: Int? = null,
 
@@ -57,7 +60,4 @@ data class User(
 
     @field:SerializedName("instagram_username")
     val instagramUsername: String? = null,
-
-    @field:SerializedName("username")
-    val username: String? = null
 )
