@@ -3,7 +3,6 @@ package uz.context.pinterestapp.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +54,6 @@ class RetrofitGetAdapter(var context: Context, var items: ArrayList<ResponseItem
                 GetDetailsInfo.id = home.id.toString()
                 GetDetailsInfo.title = home.description.toString()
                 GetDetailsInfo.links = home.urls?.small.toString()
-                Log.d("111@@@",home.id.toString())
                 itemCLick.invoke(ResponseItem())
             }
 

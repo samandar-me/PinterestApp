@@ -11,6 +11,8 @@
     <color name="random2">#242B2E</color>
     <color name="random3">#CAD5E2</color>
     <color name="random4">#030523</color>
+    <color name="random5">#FF6263</color>
+    <color name="random6">#38CC77</color>
     <color name="text_color">#171717</color>
     <color name="red">#B10808</color>
 </resources>

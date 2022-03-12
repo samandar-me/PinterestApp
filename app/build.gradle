@@ -63,7 +63,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 //    Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     //progressbar
     implementation 'com.github.zjywill:OverwatchProgress:1.6'
 }
