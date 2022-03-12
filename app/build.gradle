@@ -66,4 +66,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     //progressbar
     implementation 'com.github.zjywill:OverwatchProgress:1.6'
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
 }
