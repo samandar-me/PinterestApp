@@ -1,5 +1,7 @@
 package uz.context.pinterestapp.fragmentsall
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -75,8 +77,9 @@ class DetailFragment : Fragment() {
         }
 
         apiPosterListRetrofitFragment()
+        refreshAdapter(photos)
 
-        nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
             if (v.getChildAt(0).bottom <= (nestedScrollView.height + scrollY)) {
                 apiPosterListRetrofitFragment()
             }
@@ -89,7 +92,7 @@ class DetailFragment : Fragment() {
             override fun onResponse(call: Call<Welcome>, response: Response<Welcome>) {
                 if (response.isSuccessful) {
                     photos.addAll(response.body()!!.results!!)
-                    refreshAdapter(photos)
+                    retrofitGetAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
                 }
@@ -102,7 +105,7 @@ class DetailFragment : Fragment() {
     }
 
 
-    fun refreshAdapter(photos: ArrayList<Result>) {
+    private fun refreshAdapter(photos: ArrayList<Result>) {
         retrofitGetAdapter = DetailAdapter(requireContext(), photos)
         detailsRecyclerView.adapter = retrofitGetAdapter
         retrofitGetAdapter.itemCLick = {
