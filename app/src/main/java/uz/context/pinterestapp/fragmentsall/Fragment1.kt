@@ -67,6 +67,7 @@ class Fragment1 : Fragment() {
                 }
             }
         })
+
         retrofitGetAdapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)
         }

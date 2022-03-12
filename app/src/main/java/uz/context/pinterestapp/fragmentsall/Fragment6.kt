@@ -20,6 +20,7 @@ import uz.context.pinterestapp.adapter.RetrofitGetAdapter2
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
+import uz.context.pinterestapp.util.RandomColor
 
 class Fragment6 : Fragment() {
 

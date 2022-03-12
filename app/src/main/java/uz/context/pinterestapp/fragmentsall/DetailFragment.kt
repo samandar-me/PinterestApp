@@ -19,7 +19,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.DetailAdapter
-import uz.context.pinterestapp.adapter.RetrofitGetAdapter2
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
@@ -27,11 +26,15 @@ import uz.context.pinterestapp.util.GetDetailsInfo
 import uz.context.pinterestapp.util.RandomColor
 
 class DetailFragment : Fragment() {
+
     lateinit var textView: TextView
     lateinit var imageView: ImageView
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var detailsRecyclerView: RecyclerView
     private lateinit var retrofitGetAdapter: DetailAdapter
+    lateinit var backBtn: ImageView
+
+
     var photos = ArrayList<Result>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,7 @@ class DetailFragment : Fragment() {
         textView = view.findViewById(R.id.text_view)
         imageView = view.findViewById(R.id.image_view)
         detailsRecyclerView = view.findViewById(R.id.detailRecycler)
+        backBtn = view.findViewById(R.id.back_btn)
 
         detailsRecyclerView.setHasFixedSize(true)
         detailsRecyclerView.layoutManager =
@@ -65,6 +69,11 @@ class DetailFragment : Fragment() {
             .placeholder(RandomColor.randomColor())
             .into(imageView)
 
+        backBtn.setOnClickListener {
+//            findNavController().popBackStack()
+            findNavController().navigate(R.id.mainFragment)
+        }
+
         apiPosterListRetrofitFragment()
 
         nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -73,14 +82,6 @@ class DetailFragment : Fragment() {
             }
         })
 
-//        detailsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                if (!recyclerView.canScrollVertically(1)) {
-//                    apiPosterListRetrofitFragment()
-//                    Toast.makeText(context, "Ended", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        })
     }
 
     private fun apiPosterListRetrofitFragment() {
