@@ -16,7 +16,7 @@ interface HomeService {
     @GET("photos/random?count=1000")
     fun listPhotos1(): Call<ArrayList<ResponseItem>>
 
-    @GET("search/photos?page=1&per_page=10&query=")
+    @GET("search/photos?page=1&per_page=19&query=")
     fun searchPhotos(@Query("page") page: Int, @Query("query") search: String): Call<Welcome>
 
     @GET("users/{username}")

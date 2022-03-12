@@ -46,6 +46,7 @@ class Fragment3 : Fragment() {
         progressBar3 = view.findViewById(R.id.progress_bar3)
 
         apiPosterListRetrofitFragment3()
+        refreshAdapter(photos)
 
         recyclerView3.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -75,13 +76,11 @@ class Fragment3 : Fragment() {
                 ) {
                     if (response.body() != null) {
                         photos.addAll(response.body()!!.results!!)
-                        refreshAdapter(photos)
                         progressBar3.isVisible = false
                     }
                     else
                         Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
                 }
-
                 override fun onFailure(call: Call<Welcome>, t: Throwable) {
                     Toast.makeText(requireContext(), "Something error!", Toast.LENGTH_SHORT).show()
                     progressBar3.isVisible = false

@@ -29,6 +29,7 @@ import uz.context.pinterestapp.util.RandomColor
 
 class DetailFragment : Fragment() {
 
+    var count = 1
     lateinit var textView: TextView
     lateinit var imageView: ImageView
     private lateinit var nestedScrollView: NestedScrollView
@@ -81,27 +82,28 @@ class DetailFragment : Fragment() {
 
         nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
             if (v.getChildAt(0).bottom <= (nestedScrollView.height + scrollY)) {
+                count++
                 apiPosterListRetrofitFragment()
             }
         })
-
     }
 
     private fun apiPosterListRetrofitFragment() {
-        RetrofitHttp.posterService.searchPhotos(1, "Wallpaper").enqueue(object : Callback<Welcome> {
-            override fun onResponse(call: Call<Welcome>, response: Response<Welcome>) {
-                if (response.isSuccessful) {
-                    photos.addAll(response.body()!!.results!!)
-                    retrofitGetAdapter.notifyDataSetChanged()
-                } else {
-                    Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
+        RetrofitHttp.posterService.searchPhotos(count, "Wallpaper")
+            .enqueue(object : Callback<Welcome> {
+                override fun onResponse(call: Call<Welcome>, response: Response<Welcome>) {
+                    if (response.isSuccessful) {
+                        photos.addAll(response.body()!!.results!!)
+                        retrofitGetAdapter.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<Welcome>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
+                override fun onFailure(call: Call<Welcome>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
     }
 
 

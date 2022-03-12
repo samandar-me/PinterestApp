@@ -46,6 +46,7 @@ class Fragment4 : Fragment() {
         progressBar4 = view.findViewById(R.id.progress_bar4)
 
         apiPosterListRetrofitFragment4()
+        refreshAdapter(photos)
 
         recyclerView4.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -81,7 +82,6 @@ class Fragment4 : Fragment() {
             ) {
                 if (response.body() != null) {
                     photos.addAll(response.body()!!.results!!)
-                    refreshAdapter(photos)
                     progressBar4.isVisible = false
                 }
                 else

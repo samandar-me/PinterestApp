@@ -47,6 +47,7 @@ class Fragment6 : Fragment() {
         progressBar6 = view.findViewById(R.id.progress_bar6)
 
         apiPosterListRetrofitFragment6()
+        refreshAdapter(photos)
 
         recyclerView6.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -75,26 +76,25 @@ class Fragment6 : Fragment() {
     private fun apiPosterListRetrofitFragment6() {
         progressBar6.isVisible = true
 
-        RetrofitHttp.posterService.searchPhotos(count,"animals").enqueue(object : Callback<Welcome> {
-            override fun onResponse(
-                call: Call<Welcome>,
-                response: Response<Welcome>
-            ) {
-                if (response.body() != null) {
-                    photos.addAll(response.body()!!.results!!)
-                    refreshAdapter(photos)
-                    progressBar6.isVisible = false
+        RetrofitHttp.posterService.searchPhotos(count, "animals")
+            .enqueue(object : Callback<Welcome> {
+                override fun onResponse(
+                    call: Call<Welcome>,
+                    response: Response<Welcome>
+                ) {
+                    if (response.body() != null) {
+                        photos.addAll(response.body()!!.results!!)
+                        progressBar6.isVisible = false
+                    } else
+                        Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
                 }
-                else
-                    Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
-            }
 
-            override fun onFailure(call: Call<Welcome>, t: Throwable) {
-                Toast.makeText(requireContext(), "Something error!", Toast.LENGTH_SHORT).show()
-                progressBar6.isVisible = false
-                t.printStackTrace()
-            }
-        })
+                override fun onFailure(call: Call<Welcome>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Something error!", Toast.LENGTH_SHORT).show()
+                    progressBar6.isVisible = false
+                    t.printStackTrace()
+                }
+            })
     }
 
 
