@@ -71,7 +71,7 @@ class Fragment2 : Fragment() {
 //        RetrofitHttp.posterService.searchPhotos("cars").enqueue(object : Callback<ArrayList<ResponseItem>> {
 //        RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
 //        RetrofitHttp.posterService.searchPhotos(count, "woman carrying baby while walking")
-        RetrofitHttp.posterService.searchPhotos(count, "wallpapers")
+        RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
             .enqueue(object : Callback<Welcome> {
                 override fun onResponse(
                     call: Call<Welcome>,
@@ -100,7 +100,6 @@ class Fragment2 : Fragment() {
             searchAdapter.notifyDataSetChanged()
         }
     }
-
 
     fun refreshAdapter(photos: ArrayList<Result>) {
         searchAdapter = RetrofitGetAdapter2(requireContext(), photos)

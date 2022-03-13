@@ -8,6 +8,8 @@ import uz.context.pinterestapp.model.ResponseItem
 import uz.context.pinterestapp.model.User
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearch.Welcome
+import uz.context.pinterestapp.modelSearchFrag.CollectionsModel
+import uz.context.pinterestapp.modelSearchFrag.CollectionsModelItem
 import uz.context.pinterestapp.relatedcollection.SinglePhoto
 
 interface HomeService {
@@ -24,6 +26,9 @@ interface HomeService {
 
     @GET("photos/{id}")
     fun getImagesCategories(@Path("id") id: String): Call<Result>
+
+    @GET("collections/")
+    fun getCollections(): Call<CollectionsModel>
 }
 
 
