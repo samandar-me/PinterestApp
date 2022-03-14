@@ -18,6 +18,7 @@ import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.DetailAdapter
 import uz.context.pinterestapp.adapter.ImageSaveAdapter
 import uz.context.pinterestapp.database.MyDatabase
+import uz.context.pinterestapp.database.SaveImage
 import uz.context.pinterestapp.model.User
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.networking.RetrofitHttp
@@ -67,7 +68,6 @@ class ProfileFragment : Fragment() {
                         .load(response.body()!!.profileImage!!.large)
                         .placeholder(RandomColor.randomColor())
                         .into(imageView)
-                    Log.d("@@@@@",response.body()!!.toString())
                 }
             }
 

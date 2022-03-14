@@ -9,7 +9,6 @@ data class CollectionsModelItem(
     val last_collected_at: String,
     val links: LinksXX,
     val preview_photos: List<PreviewPhoto>,
-    val `private`: Boolean,
     val published_at: String,
     val share_key: String,
     val tags: List<Tag>,

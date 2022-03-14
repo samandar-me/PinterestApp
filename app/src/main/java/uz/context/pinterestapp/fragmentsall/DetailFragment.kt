@@ -116,7 +116,7 @@ class DetailFragment : Fragment() {
             .into(imageView)
 
         backBtn.setOnClickListener {
-            findNavController().navigate(R.id.mainFragment)
+            findNavController().popBackStack()
         }
         viewBtn.setOnClickListener {
             findNavController().navigate(R.id.action_detailFragment_to_fullScreenFragment)

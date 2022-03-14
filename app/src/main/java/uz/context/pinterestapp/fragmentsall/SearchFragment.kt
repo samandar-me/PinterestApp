@@ -2,13 +2,11 @@ package uz.context.pinterestapp.fragmentsall
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -18,16 +16,16 @@ import com.comix.overwatch.HiveProgressView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.GET
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.CategoriesAdapter
-import uz.context.pinterestapp.model.ResponseItem
-import uz.context.pinterestapp.modelSearchFrag.CollectionsModel
+import uz.context.pinterestapp.modelSearchFrag.CollectionsModelItem
 import uz.context.pinterestapp.networking.RetrofitHttp
+import uz.context.pinterestapp.util.GetDetailsInfo
 
 
 class SearchFragment : Fragment() {
 
-    var photos = ArrayList<CollectionsModel>()
     lateinit var recyclerViewSearch: RecyclerView
     private lateinit var searchAdapter: CategoriesAdapter
     lateinit var progressBarSearch: HiveProgressView
@@ -55,7 +53,7 @@ class SearchFragment : Fragment() {
         }
 
         apiPosterListRetrofitFragmentSearch()
-        refreshAdapter(photos)
+        refreshAdapter()
 
         recyclerViewSearch.setHasFixedSize(true)
         recyclerViewSearch.layoutManager =
@@ -66,27 +64,32 @@ class SearchFragment : Fragment() {
         progressBarSearch.isVisible = true
 
         RetrofitHttp.posterService.getCollections()
-            .enqueue(object : Callback<ArrayList<CollectionsModel>> {
+            .enqueue(object : Callback<List<CollectionsModelItem>> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
-                    call: Call<ArrayList<CollectionsModel>>,
-                    response: Response<ArrayList<CollectionsModel>>
+                    call: Call<List<CollectionsModelItem>>,
+                    response: Response<List<CollectionsModelItem>>
                 ) {
                     if (response.isSuccessful) {
-                        photos.addAll(response.body()!!)
-                        searchAdapter.notifyDataSetChanged()
+                        searchAdapter.submitData(response.body()!!)
                         progressBarSearch.isVisible = false
                     }
                 }
 
-                override fun onFailure(call: Call<ArrayList<CollectionsModel>>, t: Throwable) {
+                override fun onFailure(call: Call<List<CollectionsModelItem>>, t: Throwable) {
                     t.printStackTrace()
                 }
             })
     }
 
-    private fun refreshAdapter(photos: ArrayList<CollectionsModel>) {
-        searchAdapter = CategoriesAdapter(requireContext(), photos)
+    private fun refreshAdapter() {
+        searchAdapter = CategoriesAdapter(requireContext())
         recyclerViewSearch.adapter = searchAdapter
+        searchAdapter.photoClick = {
+            GetDetailsInfo.id = it.id
+            GetDetailsInfo.links = it.cover_photo.urls.small
+            GetDetailsInfo.title = it.title
+            findNavController().navigate(R.id.detailFragment)
+        }
     }
 }

@@ -2,16 +2,15 @@ package uz.context.pinterestapp.fragmentsall
 
 import android.app.Activity
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.view.KeyEvent
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -59,7 +58,15 @@ class SearchResultFragment : Fragment() {
 
         textView.setOnClickListener {
             findNavController().navigate(R.id.action_searchResultFragment_to_searchFragment)
+            hideKeyboard(requireActivity(),editText)
         }
+
+        editText.requestFocus()
+        val imm: InputMethodManager =
+            requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
+        showKeyboard(requireActivity())
 
         editText.setOnEditorActionListener { _, actionId, keyEvent ->
             if ((keyEvent != null && (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
@@ -84,6 +91,10 @@ class SearchResultFragment : Fragment() {
         adapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)
         }
+    }
+
+    private fun showKeyboard(activity: Activity?) {
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
     }
 
     private fun requestApi() {
