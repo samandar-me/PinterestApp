@@ -39,8 +39,6 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/photos_1"
-                        android:transitionName="image_big"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -96,7 +94,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="Petite Vouire"
+                                android:text="@string/petite_vouire"
                                 android:textColor="@color/text_color"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toTopOf="@id/profileSubscriber"
@@ -247,6 +245,7 @@
                             android:id="@+id/shareImage"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
+                            android:contentDescription="@string/todo"
                             android:padding="10dp"
                             android:src="@drawable/share_img"
                             app:layout_constraintBottom_toBottomOf="parent"

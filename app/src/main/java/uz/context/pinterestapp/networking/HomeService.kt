@@ -28,7 +28,7 @@ interface HomeService {
     fun getImagesCategories(@Path("id") id: String): Call<Result>
 
     @GET("collections/")
-    fun getCollections(): Call<CollectionsModel>
+    fun getCollections(): Call<ArrayList<CollectionsModel>>
 }
 
 

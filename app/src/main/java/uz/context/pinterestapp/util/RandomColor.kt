@@ -16,6 +16,7 @@ object RandomColor {
         colorList.add(R.color.random4)
         colorList.add(R.color.random5)
         colorList.add(R.color.random6)
+        colorList.add(R.color.random7)
 
         return colorList[random.nextInt(colorList.size)]
     }

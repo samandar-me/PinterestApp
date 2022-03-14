@@ -34,7 +34,13 @@
         android:id="@+id/searchFragment"
         android:name="uz.context.pinterestapp.fragmentsall.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/messageFragment"
         android:name="uz.context.pinterestapp.fragmentsall.MessageFragment"
@@ -138,6 +144,30 @@
         android:id="@+id/detailFragment"
         android:name="uz.context.pinterestapp.fragmentsall.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_fullScreenFragment"
+            app:destination="@id/fullScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullScreenFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.FullScreenFragment"
+        android:label="fragment_full_screen"
+        tools:layout="@layout/fragment_full_screen" >
+        <action
+            android:id="@+id/action_fullScreenFragment_to_detailFragment"
+            app:popUpTo="@+id/detailFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="uz.context.pinterestapp.fragmentsall.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 
 </navigation>

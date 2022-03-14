@@ -12,9 +12,9 @@ import uz.context.pinterestapp.adapter.HomeAdapter
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewPager2: ViewPager2
-    private lateinit var homeAdapter: HomeAdapter
-    private lateinit var tabLayout: TabLayout
+    var viewPager2: ViewPager2? = null
+    lateinit var homeAdapter: HomeAdapter
+    lateinit var tabLayout: TabLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
         viewPager2 = view.findViewById(R.id.view_pager22)
         tabLayout = view.findViewById(R.id.tabLayout22)
         homeAdapter = HomeAdapter(childFragmentManager, lifecycle)
-        viewPager2.adapter = homeAdapter
+        viewPager2!!.adapter = homeAdapter
 
         tabLayout.addTab(tabLayout.newTab().setText("All"))
         tabLayout.addTab(tabLayout.newTab().setText("Wallpapers"))
@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewPager2.currentItem = tab!!.position
+                viewPager2!!.currentItem = tab!!.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        viewPager2!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 tabLayout.selectTab(tabLayout.getTabAt(position))
             }

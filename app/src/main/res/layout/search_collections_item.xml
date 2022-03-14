@@ -34,7 +34,7 @@
         android:background="#33000000"
         android:fontFamily="@font/allerta"
         android:gravity="center"
-        android:text="Collections"
+        android:text="@string/collections"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />

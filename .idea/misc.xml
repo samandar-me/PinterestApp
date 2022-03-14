@@ -4,26 +4,40 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/drawable/back_bg2.xml" value="0.1745" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/drawable/back_bg_bottom.xml" value="0.1665" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/drawable/edit_bg.xml" value="0.1745" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.167" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.1665" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1745" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/font/alata.xml" value="0.2341880341880342" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/font/allerta.xml" value="0.2341880341880342" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/activity_main.xml" value="0.2094017094017094" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/bottom_sheet.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_1.xml" value="0.20675105485232068" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_2.xml" value="0.20675105485232068" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_6.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_detail.xml" value="0.2094017094017094" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_full_screen.xml" value="0.2094017094017094" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_home.xml" value="0.20675105485232068" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_main.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_message.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_messages.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_profile.xml" value="0.20675105485232068" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_search.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_search_result.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/fragment_update.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/home_recycler_item.xml" value="0.20675105485232068" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/home_recycler_item2.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/item_layout.xml" value="0.2094017094017094" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/item_tab_main.xml" value="0.20675105485232068" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/search_collections_item.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/search_item.xml" value="0.2094017094017094" />
+        <entry key="..\:/Users/AndroidNetworking/PinterestApp/app/src/main/res/layout/update_layout.xml" value="0.2094017094017094" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable-v24/tab_main_background.xml" value="0.118" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable/back_black.xml" value="0.1395" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable/circle_shape.xml" value="0.118" />
-        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable/edit_bg.xml" value="0.1395" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/drawable/ic_more.xml" value="0.118" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/detail_fragment_item.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_1.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_3.xml" value="0.25416666666666665" />
@@ -32,13 +46,10 @@
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_main.xml" value="0.2" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_message.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/fragment_search.xml" value="0.2059071729957806" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/home_recycler_item.xml" value="0.2" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/home_recycler_item2.xml" value="0.176" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/item_tab_main.xml" value="0.264" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/item_tab_main2.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/search_collections_item.xml" value="0.4" />
-        <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/search_item.xml" value="0.2059071729957806" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/styles.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/OsiyoComputers/AndroidStudioProjects/PinterestApp/app/src/main/res/layout/tab_main_background.xml" value="0.22826086956521738" />
       </map>

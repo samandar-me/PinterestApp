@@ -39,6 +39,7 @@ class MessageFragment : Fragment() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 viewPager2.currentItem = tab!!.position
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}

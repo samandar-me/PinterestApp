@@ -18,11 +18,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <ImageView
+                android:contentDescription="@string/todo"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:padding="10dp"
@@ -30,13 +32,13 @@
                 android:src="@drawable/search_png" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="18sp"
                 android:textColor="@android:color/darker_gray"
                 android:gravity="center_vertical|start"
-                android:paddingLeft="2dp"
+                android:paddingStart="2dp"
                 android:text="@string/search_for_ideas" />
 
         </LinearLayout>
@@ -58,8 +60,6 @@
                 android:id="@+id/textViewSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editTextSearch"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="@string/idea"
                 android:textColor="@color/black"
@@ -70,12 +70,10 @@
                 android:id="@+id/recyclerViewSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/textViewSearch"
                 android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/search_collections_item" />
-
 
         </LinearLayout>
 

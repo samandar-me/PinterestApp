@@ -13,6 +13,7 @@ import uz.context.pinterestapp.R
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearchFrag.CollectionsModel
 import uz.context.pinterestapp.modelSearchFrag.CollectionsModelItem
+import uz.context.pinterestapp.util.RandomColor
 
 class CategoriesAdapter(private val context: Context, private val lists: ArrayList<CollectionsModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -27,13 +28,12 @@ class CategoriesAdapter(private val context: Context, private val lists: ArrayLi
 
         if (holder is MyViewHolder) {
             holder.apply {
-                textView.text = list[position].title
-//                textView.text = list.title
                 Glide.with(context)
-                    .load(list[position].cover_photo.urls.raw)
-//                    .load(list.cover_photo.urls.raw)
+                    .load(list.links!!.photos)
+                    .placeholder(RandomColor.randomColor())
                     .into(imageView)
 
+                textView.text = list.title
             }
         }
     }

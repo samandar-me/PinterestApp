@@ -20,9 +20,7 @@ class MainActivity : AppCompatActivity() {
         //delete night mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
             hideSystemBars()
-
         }
         else {
             window.setFlags(
@@ -30,7 +28,6 @@ class MainActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
         }
-
     }
     private fun hideSystemBars() {
         window.apply {

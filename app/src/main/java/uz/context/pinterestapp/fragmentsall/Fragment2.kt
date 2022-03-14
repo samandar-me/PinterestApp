@@ -68,9 +68,6 @@ class Fragment2 : Fragment() {
     private fun apiPosterListRetrofitFragment2() {
         progressBar2.isVisible = true
 
-//        RetrofitHttp.posterService.searchPhotos("cars").enqueue(object : Callback<ArrayList<ResponseItem>> {
-//        RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
-//        RetrofitHttp.posterService.searchPhotos(count, "woman carrying baby while walking")
         RetrofitHttp.posterService.searchPhotos(count, "Wallpapers")
             .enqueue(object : Callback<Welcome> {
                 override fun onResponse(
@@ -101,7 +98,7 @@ class Fragment2 : Fragment() {
         }
     }
 
-    fun refreshAdapter(photos: ArrayList<Result>) {
+    private fun refreshAdapter(photos: ArrayList<Result>) {
         searchAdapter = RetrofitGetAdapter2(requireContext(), photos)
         recyclerView2.adapter = searchAdapter
         searchAdapter.itemCLick = {

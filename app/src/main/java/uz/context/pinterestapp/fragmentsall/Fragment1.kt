@@ -20,7 +20,6 @@ import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.RetrofitGetAdapter
 import uz.context.pinterestapp.model.ResponseItem
 import uz.context.pinterestapp.networking.RetrofitHttp
-/////
 class Fragment1 : Fragment() {
 
     var photos = ArrayList<ResponseItem>()

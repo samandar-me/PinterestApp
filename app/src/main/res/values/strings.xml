@@ -7,4 +7,11 @@
     <string name="search_for_ideas">Search for ideas</string>
     <string name="idea">Ideas for you</string>
     <string name="picture">Picture</string>
+    <string name="profile">Profile</string>
+    <string name="gallery">Gallery</string>
+    <string name="petite_vouire">Petite Vouire</string>
+    <string name="collections">Collections</string>
+    <string name="ideas">Share ideas\nwith your\nfriends</string>
+    <string name="lorem">Lorem Ipsum dolor sit amet, consecrated</string>
+    <string name="sam">Samandar Asiydinov</string>
 </resources>

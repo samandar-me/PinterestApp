@@ -17,6 +17,6 @@
         <item name="cornerSize">50%</item>
     </style>
     <style name="radius">
-        <item name="cornerSize">10%</item>
+        <item name="cornerSize">6%</item>
     </style>
 </resources>

@@ -1,14 +1,17 @@
 package uz.context.pinterestapp.fragmentsall
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.comix.overwatch.HiveProgressView
@@ -28,7 +31,8 @@ class SearchFragment : Fragment() {
     lateinit var recyclerViewSearch: RecyclerView
     private lateinit var searchAdapter: CategoriesAdapter
     lateinit var progressBarSearch: HiveProgressView
-    lateinit var textViewSearch: TextView
+    private lateinit var textView: TextView
+    private lateinit var linearLayout: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +46,13 @@ class SearchFragment : Fragment() {
     private fun initViews(view: View) {
 
         recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch)
+        textView = view.findViewById(R.id.textViewSearch)
         progressBarSearch = view.findViewById(R.id.progress_bar_search)
-        textViewSearch = view.findViewById(R.id.textViewSearch)
+        linearLayout = view.findViewById(R.id.linearlayout)
+
+        linearLayout.setOnClickListener {
+            findNavController().navigate(R.id.searchResultFragment)
+        }
 
         apiPosterListRetrofitFragmentSearch()
         refreshAdapter(photos)
@@ -51,35 +60,33 @@ class SearchFragment : Fragment() {
         recyclerViewSearch.setHasFixedSize(true)
         recyclerViewSearch.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
     }
 
     private fun apiPosterListRetrofitFragmentSearch() {
-        progressBarSearch.visibility = View.VISIBLE
+        progressBarSearch.isVisible = true
+
         RetrofitHttp.posterService.getCollections()
-
-            .enqueue(object : Callback<CollectionsModel> {
+            .enqueue(object : Callback<ArrayList<CollectionsModel>> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
-                    call: Call<CollectionsModel>,
-                    response: Response<CollectionsModel>
+                    call: Call<ArrayList<CollectionsModel>>,
+                    response: Response<ArrayList<CollectionsModel>>
                 ) {
-                    textViewSearch.text = response.body().toString()
-                    progressBarSearch.isVisible = false
+                    if (response.isSuccessful) {
+                        photos.addAll(response.body()!!)
+                        searchAdapter.notifyDataSetChanged()
+                        progressBarSearch.isVisible = false
+                    }
                 }
 
-                override fun onFailure(call: Call<CollectionsModel>, t: Throwable) {
-
+                override fun onFailure(call: Call<ArrayList<CollectionsModel>>, t: Throwable) {
+                    t.printStackTrace()
                 }
-
-
             })
     }
 
-    fun refreshAdapter(photos: ArrayList<CollectionsModel>) {
+    private fun refreshAdapter(photos: ArrayList<CollectionsModel>) {
         searchAdapter = CategoriesAdapter(requireContext(), photos)
         recyclerViewSearch.adapter = searchAdapter
-//        searchAdapter.itemCLick = {
-//            findNavController().navigate(R.id.detailFragment)
-//        }
     }
 }

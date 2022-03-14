@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp">
+    android:layout_margin="4dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view1"
@@ -26,7 +26,6 @@
             android:background="@color/white"
             android:scaleType="fitCenter"
             android:src="@drawable/girl_img"
-            android:transitionName="image_small"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"

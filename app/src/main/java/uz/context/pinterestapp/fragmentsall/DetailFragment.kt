@@ -1,6 +1,8 @@
 package uz.context.pinterestapp.fragmentsall
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -25,14 +27,23 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
+import com.google.android.material.imageview.ShapeableImageView
 import es.dmoral.toasty.Toasty
 import okio.IOException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.GET
 import uz.context.pinterestapp.R
 import uz.context.pinterestapp.adapter.DetailAdapter
+import uz.context.pinterestapp.adapter.RetrofitGetAdapter
+import uz.context.pinterestapp.database.MyDatabase
+import uz.context.pinterestapp.database.SaveImage
+import uz.context.pinterestapp.model.Links
+import uz.context.pinterestapp.model.ResponseItem
+import uz.context.pinterestapp.model.Sponsor
 import uz.context.pinterestapp.modelSearch.Result
 import uz.context.pinterestapp.modelSearch.Welcome
 import uz.context.pinterestapp.networking.RetrofitHttp
@@ -42,21 +53,27 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailFragment : Fragment() {
 
     var count = 1
     private lateinit var saveCardView: CircularRevealCardView
     lateinit var textView: TextView
+    private lateinit var viewBtn: CircularRevealCardView
     lateinit var imageView: ImageView
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var detailsRecyclerView: RecyclerView
-    private lateinit var retrofitGetAdapter: DetailAdapter
+    private lateinit var retrofitGetAdapter: RetrofitGetAdapter
     lateinit var backBtn: ImageView
-    private var outStream: FileOutputStream? = null
+    private lateinit var shareImageView: ImageView
+    private lateinit var profileName: TextView
+    private lateinit var profileSubscriber: TextView
+    private lateinit var profileImage: ShapeableImageView
+    private lateinit var myDatabase: MyDatabase
 
-
-    var photos = ArrayList<Result>()
+    var photos = ArrayList<ResponseItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,6 +90,13 @@ class DetailFragment : Fragment() {
         detailsRecyclerView = view.findViewById(R.id.detailRecycler)
         backBtn = view.findViewById(R.id.back_btn)
         saveCardView = view.findViewById(R.id.saveCard)
+        viewBtn = view.findViewById(R.id.viewCard)
+        shareImageView = view.findViewById(R.id.shareImage)
+        profileName = view.findViewById(R.id.profileName)
+        profileImage = view.findViewById(R.id.profileImage)
+        profileSubscriber = view.findViewById(R.id.profileSubscriber)
+
+        myDatabase = MyDatabase.getInstance(requireContext())
 
         detailsRecyclerView.setHasFixedSize(true)
         detailsRecyclerView.layoutManager =
@@ -92,15 +116,21 @@ class DetailFragment : Fragment() {
             .into(imageView)
 
         backBtn.setOnClickListener {
-//            findNavController().popBackStack()
             findNavController().navigate(R.id.mainFragment)
+        }
+        viewBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_detailFragment_to_fullScreenFragment)
+        }
+
+        shareImageView.setOnClickListener {
+            shareImageView()
         }
 
         apiPosterListRetrofitFragment()
         refreshAdapter(photos)
 
         saveCardView.setOnClickListener {
-            saveGallery(imageView)
+            showBottomSheet()
         }
 
         nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
@@ -112,33 +142,93 @@ class DetailFragment : Fragment() {
     }
 
     private fun apiPosterListRetrofitFragment() {
-        RetrofitHttp.posterService.searchPhotos(count, "Wallpaper")
-            .enqueue(object : Callback<Welcome> {
-                override fun onResponse(call: Call<Welcome>, response: Response<Welcome>) {
-                    if (response.isSuccessful) {
-                        photos.addAll(response.body()!!.results!!)
-                        retrofitGetAdapter.notifyDataSetChanged()
-                    } else {
-                        Toast.makeText(context, "Limit has ended", Toast.LENGTH_SHORT).show()
-                    }
+        RetrofitHttp.posterService.listPhotos1()
+            .enqueue(object : Callback<ArrayList<ResponseItem>> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<ArrayList<ResponseItem>>,
+                    response: Response<ArrayList<ResponseItem>>
+                ) {
+                    photos.addAll(response.body()!!)
+                    retrofitGetAdapter.notifyDataSetChanged()
                 }
 
-                override fun onFailure(call: Call<Welcome>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<ResponseItem>>, t: Throwable) {
                     t.printStackTrace()
                 }
             })
     }
 
 
-    private fun refreshAdapter(photos: ArrayList<Result>) {
-        retrofitGetAdapter = DetailAdapter(requireContext(), photos)
+    private fun refreshAdapter(photos: ArrayList<ResponseItem>) {
+        retrofitGetAdapter = RetrofitGetAdapter(requireContext(), photos)
         detailsRecyclerView.adapter = retrofitGetAdapter
         retrofitGetAdapter.itemCLick = {
             findNavController().navigate(R.id.detailFragment)
         }
     }
 
-    private fun saveGallery(iv_image: ImageView) {
+    private fun showBottomSheet() {
+        val view: View = layoutInflater.inflate(R.layout.bottom_sheet, null)
+        val textGallery: TextView = view.findViewById(R.id.textGallery)
+        val textProfile: TextView = view.findViewById(R.id.textProfile)
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(view)
+
+        textGallery.setOnClickListener {
+            saveToGallery(imageView)
+            dialog.dismiss()
+        }
+        textProfile.setOnClickListener {
+            saveToDatabase()
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+    private fun saveToDatabase() {
+        if (GetDetailsInfo.title.isNullOrEmpty()) {
+            myDatabase.dao()
+                .saveImage(
+                    SaveImage(
+                        GetDetailsInfo.id!!,
+                        GetDetailsInfo.links!!,
+                        GetDetailsInfo.title!!
+                    )
+                )
+        } else {
+            myDatabase.dao()
+                .saveImage(
+                    SaveImage(
+                        GetDetailsInfo.id!!,
+                        GetDetailsInfo.links!!,
+                        ""
+                    )
+                )
+        }
+        toasty("Saved!")
+    }
+
+    private fun shareImageView() {
+        val bitmapDrawable = imageView.drawable as BitmapDrawable
+        val bitmap = bitmapDrawable.bitmap
+        val bitmapPath = MediaStore.Images.Media.insertImage(
+            requireContext().contentResolver,
+            bitmap,
+            "title",
+            null
+        )
+        val uri = Uri.parse(bitmapPath)
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "image/jpg"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            putExtra(Intent.EXTRA_TEXT, GetDetailsInfo.links)
+        }
+        startActivity(Intent.createChooser(intent, "Share"))
+    }
+
+    private fun saveToGallery(iv_image: ImageView) {
         val bitmap = getScreenShotFromView(iv_image)
 
         if (bitmap != null) {
@@ -155,7 +245,7 @@ class DetailFragment : Fragment() {
             val canvas = Canvas(screenshot)
             v.draw(canvas)
         } catch (e: Exception) {
-            Log.e("GFG", "Failed to capture screenshot because:" + e.message)
+            e.printStackTrace()
         }
         return screenshot
     }
@@ -189,7 +279,11 @@ class DetailFragment : Fragment() {
 
         fos?.use {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-            Toasty.success(requireContext(), "Saved!", Toast.LENGTH_SHORT, true).show();
+            toasty("Saved!")
         }
+    }
+
+    private fun toasty(msg: String) {
+        Toasty.success(requireContext(), msg, Toasty.LENGTH_LONG, true).show()
     }
 }
